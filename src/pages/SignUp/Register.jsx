@@ -1,41 +1,85 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
+import Swal from "sweetalert2";
 import { AuthContext } from "../Context-Provider/AuthContext";
+import { useNavigate, Link } from "react-router";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
-    const [showPassword, setShowPassword] = useState(false);
-  const { createRegisterInfo, googleLoginInfo } = use(AuthContext);
-    
-  const formSubmitHandler = (e) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const { createRegisterInfo, googleLoginInfo, logOutInfo } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+
+
+  // Form Submit Handler
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
     const name = e.target.name.value;
     const photoURL = e.target.photoURL.value;
     const email = e.target.email.value;
-    const password = e.target.password.value; 
-    console.log(name, photoURL, email, password);
+    const password = e.target.password.value;
 
-    createRegisterInfo(email, password)
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        // e.target.reset();
-      })
-      .catch((error) => {
-        console.log("Error from register page", error.message);
+    if (!passwordRegex.test(password)) {
+      return Swal.fire(
+        "Error",
+        "Password must have at least 1 uppercase, 1 lowercase, and minimum 6 characters",
+        "error"
+      );
+    }
+
+    try {
+      const result = await createRegisterInfo(email, password);
+      const user = result.user;
+
+      if (name || photoURL) {
+        await updateProfile(user, {
+          displayName: name,
+          photoURL: photoURL,
+        });
+      }
+
+      await logOutInfo();
+
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful!",
+        text: `Welcome, ${name}. Please login to continue.`,
       });
-  }
-  
-  const googleLoginHandler = () => {
-    googleLoginInfo()
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-      })
-      .catch((error) => {
-        console.log("Error from Google sign in", error.message);
-      }); 
-  }
+
+      e.target.reset();
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 500);
+    } catch (error) {
+      console.log("Error from register page", error.message);
+      Swal.fire("Error", error.message, "error");
+    }
+  };
+
+
+  //Google Log In Handler
+  const googleLoginHandler = async () => {
+    try {
+      const result = await googleLoginInfo();
+      const user = result.user;
+
+      Swal.fire({
+        icon: "success",
+        title: "Google Sign-In Successful",
+        text: `Welcome, ${user.displayName || user.email}`,
+      });
+
+      navigate("/");
+    } catch (error) {
+      console.log("Error from Google sign in", error.message);
+      Swal.fire("Error", error.message, "error");
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-4">
@@ -115,10 +159,17 @@ const Register = () => {
               <FcGoogle className="text-2xl" />
               Continue with Google
             </button>
-                  </fieldset>
-                  <div>
-                    <p className="text-sm ">Already have an account? <a href="/login" className="text-blue-500 underline">LogIn</a> here</p>
-                  </div>
+          </fieldset>
+
+          <div>
+            <p className="text-sm">
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-500 underline">
+                LogIn
+              </Link>{" "}
+              here
+            </p>
+          </div>
         </form>
       </div>
     </div>

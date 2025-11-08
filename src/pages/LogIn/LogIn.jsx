@@ -1,9 +1,57 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Context-Provider/AuthContext";
+import { useNavigate, Link } from "react-router";
 
-const LogIn = ({ onSubmit, onGoogleSignIn }) => {
+const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { logInInfo, googleLoginInfo } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  // Email/password login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    try {
+      const result = await logInInfo(email, password);
+      const user = result.user;
+
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful!",
+        text: `Welcome back, ${user.displayName || user.email}`,
+      });
+
+      e.target.reset();
+      navigate("/");
+    } catch (error) {
+      console.log("Login error:", error.message);
+      Swal.fire("Error", error.message, "error");
+    }
+  };
+
+  // Google login
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleLoginInfo();
+      const user = result.user;
+
+      Swal.fire({
+        icon: "success",
+        title: "Google Sign-In Successful",
+        text: `Welcome, ${user.displayName || user.email}`,
+      });
+
+      navigate("/");
+    } catch (error) {
+      console.log("Google login error:", error.message);
+      Swal.fire("Error", error.message, "error");
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-4">
@@ -12,7 +60,7 @@ const LogIn = ({ onSubmit, onGoogleSignIn }) => {
           Welcome Back
         </h1>
 
-        <form onSubmit={onSubmit} className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-4">
           <fieldset className="fieldset space-y-3">
             {/* Email */}
             <div>
@@ -45,7 +93,7 @@ const LogIn = ({ onSubmit, onGoogleSignIn }) => {
               </span>
             </div>
 
-            {/* Log In Button */}
+            {/* Login Button */}
             <button className="btn btn-neutral w-full mt-3">Log In</button>
 
             {/* Divider */}
@@ -54,17 +102,24 @@ const LogIn = ({ onSubmit, onGoogleSignIn }) => {
             {/* Google Login Button */}
             <button
               type="button"
-              onClick={onGoogleSignIn}
+              onClick={handleGoogleLogin}
               className="btn btn-outline w-full flex items-center justify-center gap-2"
             >
               <FcGoogle className="text-2xl" />
               Continue with Google
             </button>
           </fieldset>
-              </form>
-              <div>
-                  <p className="text-sm ">Don't have an account? <a href="/register" className="text-blue-500 underline">Register</a> here</p>
-              </div>
+        </form>
+
+        <div className="mt-4 text-center">
+          <p className="text-sm">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-blue-500 underline">
+              Register
+            </Link>{" "}
+            here
+          </p>
+        </div>
       </div>
     </div>
   );
