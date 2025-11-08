@@ -92,13 +92,13 @@ const Navbar = () => {
             </label>
             <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
               <li>
-                <span className="font-semibold">{user.displayName}</span>
+                <span className="font-semibold hover:bg-blue-600 hover:text-white">{user.displayName}</span>
               </li>
               <li>
-                <span className="text-sm text-gray-500">{user.email}</span>
+                <span className="text-sm text-gray-500 hover:bg-blue-600 hover:text-white">{user.email}</span>
               </li>
               <li>
-                <button onClick={handleLogout} className="btn btn-outline btn-sm w-full mt-2">
+                <button onClick={handleLogout} className="btn btn-outline btn-sm w-full mt-2 hover:bg-blue-600 hover:text-white">
                   Log Out
                 </button>
               </li>
