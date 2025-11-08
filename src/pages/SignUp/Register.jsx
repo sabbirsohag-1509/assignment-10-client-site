@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../Context-Provider/AuthContext";
 
-const Register = ({ onSubmit, onGoogleSignIn }) => {
+const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
+  const { createRegisterInfo, googleLoginInfo } = use(AuthContext);
     
-    
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const photoURL = e.target.photoURL.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value; 
+    console.log(name, photoURL, email, password);
+
+    createRegisterInfo(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        // e.target.reset();
+      })
+      .catch((error) => {
+        console.log("Error from register page", error.message);
+      });
+  }
+  
+  const googleLoginHandler = () => {
+    googleLoginInfo()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.log("Error from Google sign in", error.message);
+      }); 
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-4">
@@ -14,7 +44,7 @@ const Register = ({ onSubmit, onGoogleSignIn }) => {
           Create an Account for Free
         </h1>
 
-        <form onSubmit={onSubmit} className="space-y-4">
+        <form onSubmit={formSubmitHandler} className="space-y-4">
           <fieldset className="fieldset space-y-3">
             {/* Name */}
             <div>
@@ -79,7 +109,7 @@ const Register = ({ onSubmit, onGoogleSignIn }) => {
             {/* Google Sign In Button */}
             <button
               type="button"
-              onClick={onGoogleSignIn}
+              onClick={googleLoginHandler}
               className="btn btn-outline w-full flex items-center justify-center gap-2"
             >
               <FcGoogle className="text-2xl" />
