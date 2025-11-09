@@ -5,6 +5,7 @@ import Register from "../pages/SignUp/Register";
 import LogIn from "../pages/LogIn/LogIn";
 import AddProperty from "../pages/AddProperty/AddProperty";
 import AllProperties from "../pages/AllProperties/AllProperties";
+import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,8 @@ const router = createBrowserRouter([
         Component: AllProperties,
       },
       { 
-        
+        path: "propertyDetails/:id",
+        element: <PropertyDetails></PropertyDetails>
       },
     ],
   },

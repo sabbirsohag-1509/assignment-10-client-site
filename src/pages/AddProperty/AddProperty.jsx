@@ -3,6 +3,7 @@ import { AuthContext } from "../Context-Provider/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
 import bgImg from "../../assets/bgImg.jpg";
+import Loading from "../../components/Loading/Loading";
 
 const AddProperty = () => {
   const { user } = useContext(AuthContext);
@@ -23,8 +24,8 @@ const AddProperty = () => {
 
   if (!user) {
     return (
-      <div className="text-center mt-20 text-gray-700 dark:text-gray-200">
-        Loading user info...
+      <div className="text-center ">
+        <Loading></Loading>
       </div>
     );
   }
