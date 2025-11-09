@@ -44,7 +44,7 @@ const AddProperty = () => {
       userEmail: user.email,
       postedDate: new Date().toISOString(),
     };
-    console.log(newProperty);
+    // console.log(newProperty);
 
     try {
       const res = await axios.post(
