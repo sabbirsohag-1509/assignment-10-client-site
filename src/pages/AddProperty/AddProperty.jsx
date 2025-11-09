@@ -2,10 +2,11 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../Context-Provider/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
+import bgImg from "../../assets/bgImg.jpg";
 
 const AddProperty = () => {
   const { user } = useContext(AuthContext);
-  //   const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     propertyName: "",
@@ -34,85 +35,47 @@ const AddProperty = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const {
-      propertyName,
-      description,
-      category,
-      price,
-      city,
-      area,
-      address,
-      imageURL,
-    } = formData;
-
-    if (
-      !propertyName ||
-      !description ||
-      !category ||
-      !price ||
-      !city ||
-      !area ||
-      !address ||
-      !imageURL
-    ) {
-      Swal.fire({
-        icon: "error",
-        title: "Required!!",
-        text: "All fields are required!",
-      });
-      return;
-    }
-
     setLoading(true);
 
     const newProperty = {
-      propertyName,
-      description,
-      category,
-      price,
-      city,
-      area,
-      address,
-      imageURL,
+      ...formData,
       userName: user.displayName,
       userEmail: user.email,
+      postedDate: new Date().toISOString(),
     };
-    try {
-      const res = await axios.post("http://localhost:3000/properties", {newProperty});
-      const data = await res.json();
+    console.log(newProperty);
 
-      if (res.ok) {
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: "Property added successfully!",
-          timer: 1500,
-          showConfirmButton: false,
-        });
-        setFormData({
-          propertyName: "",
-          description: "",
-          category: "",
-          price: "",
-          city: "",
-          area: "",
-          address: "",
-          imageURL: "",
-        });
-        // navigate("/");
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: data.message || "Failed to add property",
-        });
-      }
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/properties",
+        newProperty
+      );
+      console.log("Property added:", res.data);
+
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Property added successfully!",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      setFormData({
+        propertyName: "",
+        description: "",
+        category: "",
+        price: "",
+        city: "",
+        area: "",
+        address: "",
+        imageURL: "",
+      });
     } catch (error) {
       Swal.fire({
-        icon: `${error}`,
+        icon: "error",
         title: "Server Error",
-        text: "Try again later!",
+        text:
+          error.response?.data?.message || error.message || "Try again later!",
       });
     } finally {
       setLoading(false);
@@ -120,10 +83,17 @@ const AddProperty = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center p-4">
+    <div
+      className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${bgImg})` }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50"></div>
+
+      {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-3xl bg-white dark:bg-gray-800 shadow-md rounded-lg p-8 space-y-6"
+        className="relative w-full max-w-3xl bg-white/90 dark:bg-gray-800/90 shadow-lg rounded-lg p-8 space-y-6 z-10"
       >
         <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 text-center">
           Add New Property
@@ -140,7 +110,8 @@ const AddProperty = () => {
             value={formData.propertyName}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Luxury Apartment...."
+                      placeholder="Your Property Name"
+                      required
           />
         </div>
 
@@ -167,14 +138,16 @@ const AddProperty = () => {
           <select
             name="category"
             value={formData.category}
-            onChange={handleChange}
+                      onChange={handleChange}
+                      required
             className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Category</option>
             <option value="Rent">Rent</option>
             <option value="Sale">Sale</option>
             <option value="Commercial">Commercial</option>
-            <option value="Land">Land</option>
+                      <option value="Land">Land</option>
+                    
           </select>
         </div>
 
@@ -189,7 +162,8 @@ const AddProperty = () => {
             value={formData.price}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="1200000"
+                      placeholder="Your Property Price"
+                      required
           />
         </div>
 
@@ -251,7 +225,7 @@ const AddProperty = () => {
           />
         </div>
 
-        {/* Read-only User Info */}
+        {/* User Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-gray-700 dark:text-gray-200 mb-1">

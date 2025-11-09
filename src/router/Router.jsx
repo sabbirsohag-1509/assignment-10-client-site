@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Register from "../pages/SignUp/Register";
 import LogIn from "../pages/LogIn/LogIn";
 import AddProperty from "../pages/AddProperty/AddProperty";
+import AllProperties from "../pages/AllProperties/AllProperties";
 
 const router = createBrowserRouter([
   {
@@ -17,15 +18,22 @@ const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
-        },
-        {
-            path: "/login",
-            Component: LogIn
-        },
-        {
-          path: "/add-property",
-          element: <AddProperty></AddProperty>
-        }
+      },
+      {
+        path: "/login",
+        Component: LogIn,
+      },
+      {
+        path: "/add-property",
+        element: <AddProperty></AddProperty>,
+      },
+      {
+        path: "/all-properties",
+        Component: AllProperties,
+      },
+      { 
+        
+      },
     ],
   },
 ]);
