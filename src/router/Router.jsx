@@ -6,6 +6,7 @@ import LogIn from "../pages/LogIn/LogIn";
 import AddProperty from "../pages/AddProperty/AddProperty";
 import AllProperties from "../pages/AllProperties/AllProperties";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -38,5 +39,9 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "*",
+    element: <ErrorPage></ErrorPage>
+  }
 ]);
 export default router;
