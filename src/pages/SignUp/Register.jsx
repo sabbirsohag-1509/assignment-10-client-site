@@ -12,8 +12,7 @@ const Register = () => {
     useContext(AuthContext);
   const navigate = useNavigate();
 
-
-  // Form Submit Handler
+  // ---------- Form Submit ----------
   const formSubmitHandler = async (e) => {
     e.preventDefault();
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
@@ -51,18 +50,13 @@ const Register = () => {
       });
 
       e.target.reset();
-
-      setTimeout(() => {
-        navigate("/login");
-      }, 500);
+      setTimeout(() => navigate("/login"), 500);
     } catch (error) {
-      console.log("Error from register page", error.message);
       Swal.fire("Error", error.message, "error");
     }
   };
 
-
-  //Google Log In Handler
+  // ---------- Google Login ----------
   const googleLoginHandler = async () => {
     try {
       const result = await googleLoginInfo();
@@ -76,15 +70,14 @@ const Register = () => {
 
       navigate("/");
     } catch (error) {
-      console.log("Error from Google sign in", error.message);
       Swal.fire("Error", error.message, "error");
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-4">
-      <div className="bg-white shadow-2xl rounded-2xl w-full max-w-md p-8">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-base-100 to-base-200 dark:from-gray-900 dark:to-gray-800 p-4 transition-all duration-500">
+      <div className="bg-base-100 dark:bg-gray-900 shadow-2xl rounded-2xl w-full max-w-md p-8 border border-gray-200 dark:border-gray-700 transition-all duration-300">
+        <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-100 mb-6">
           Create an Account for Free
         </h1>
 
@@ -92,11 +85,13 @@ const Register = () => {
           <fieldset className="fieldset space-y-3">
             {/* Name */}
             <div>
-              <label className="label font-semibold text-sm">Your Name</label>
+              <label className="label font-semibold text-sm dark:text-gray-200">
+                Your Name
+              </label>
               <input
                 type="text"
                 name="name"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                 placeholder="Your Name"
                 required
               />
@@ -104,22 +99,26 @@ const Register = () => {
 
             {/* Photo URL */}
             <div>
-              <label className="label font-semibold text-sm">Photo URL</label>
+              <label className="label font-semibold text-sm dark:text-gray-200">
+                Photo URL
+              </label>
               <input
                 type="text"
                 name="photoURL"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                 placeholder="Photo URL"
               />
             </div>
 
             {/* Email */}
             <div>
-              <label className="label font-semibold text-sm">Email</label>
+              <label className="label font-semibold text-sm dark:text-gray-200">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                 placeholder="Email"
                 required
               />
@@ -127,15 +126,17 @@ const Register = () => {
 
             {/* Password */}
             <div className="relative">
-              <label className="label font-semibold text-sm">Password</label>
+              <label className="label font-semibold text-sm dark:text-gray-200">
+                Password
+              </label>
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                className="input input-bordered w-full pr-10"
+                className="input input-bordered w-full pr-10 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                 placeholder="Password"
                 required
               />
-              <span className="absolute top-8 right-3 cursor-pointer text-gray-600">
+              <span className="absolute top-8 right-3 cursor-pointer text-gray-600 dark:text-gray-300">
                 {showPassword ? (
                   <BsFillEyeFill onClick={() => setShowPassword(false)} />
                 ) : (
@@ -148,24 +149,24 @@ const Register = () => {
             <button className="btn btn-neutral w-full mt-3">Register</button>
 
             {/* Divider */}
-            <div className="divider text-gray-400">OR</div>
+            <div className="divider text-gray-400 dark:text-gray-500">OR</div>
 
             {/* Google Sign In Button */}
             <button
               type="button"
               onClick={googleLoginHandler}
-              className="btn btn-outline w-full flex items-center justify-center gap-2"
+              className="btn btn-outline w-full flex items-center justify-center gap-2 dark:border-gray-600 dark:text-gray-200"
             >
               <FcGoogle className="text-2xl" />
               Continue with Google
             </button>
           </fieldset>
 
-          <div>
-            <p className="text-sm">
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               Already have an account?{" "}
               <Link to="/login" className="text-blue-500 underline">
-                LogIn
+                Log In
               </Link>{" "}
               here
             </p>

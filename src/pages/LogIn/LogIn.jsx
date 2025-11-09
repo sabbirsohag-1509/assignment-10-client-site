@@ -4,6 +4,10 @@ import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Context-Provider/AuthContext";
 import { useNavigate, Link } from "react-router";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import logoImg from "../../assets/logo.png";
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -53,10 +57,56 @@ const LogIn = () => {
     }
   };
 
+  // Slider settings
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
+  };
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-4">
-      <div className="bg-white shadow-2xl rounded-2xl w-full max-w-md p-8">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+    <div className="flex flex-col lg:flex-row justify-center items-center min-h-screen bg-base-200 transition-colors duration-300 p-4 gap-10">
+      {/* ---------- Left Side: Slider ---------- */}
+      <div className="w-full lg:w-1/2 max-w-xl">
+        <Slider {...sliderSettings}>
+          <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-10 rounded-2xl text-center shadow-lg">
+            <h2 className="text-3xl font-bold text-primary mb-3 flex items-center justify-center gap-2">
+              Welcome to Home Nest
+              <img className="w-16 h-16 object-contain" src={logoImg} alt="logo" />
+            </h2>
+            <p className="text-base-content/80">
+              Discover your perfect home easily. Explore modern, comfortable, and affordable properties today.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-r from-success/10 to-success/5 p-10 rounded-2xl text-center shadow-lg">
+            <h2 className="text-3xl font-bold text-success mb-3">
+              Smart Search & Filters 🔍
+            </h2>
+            <p className="text-base-content/80">
+              Find homes that match your budget, location, and lifestyle effortlessly.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-r from-warning/10 to-warning/5 p-10 rounded-2xl text-center shadow-lg">
+            <h2 className="text-3xl font-bold text-warning mb-3">
+              Trusted Agents 🤝
+            </h2>
+            <p className="text-base-content/80">
+              Connect with verified agents and landlords for a safe and transparent experience.
+            </p>
+          </div>
+        </Slider>
+      </div>
+
+      {/* ---------- Right Side: Login Form ---------- */}
+      <div className="bg-base-100 shadow-2xl rounded-2xl w-full max-w-md p-8 border border-base-300 transition-colors duration-300">
+        <h1 className="text-3xl font-bold text-center text-base-content mb-6">
           Welcome Back
         </h1>
 
@@ -64,11 +114,13 @@ const LogIn = () => {
           <fieldset className="fieldset space-y-3">
             {/* Email */}
             <div>
-              <label className="label font-semibold text-sm">Email</label>
+              <label className="label font-semibold text-sm text-base-content/90">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-base-200 focus:outline-none"
                 placeholder="Enter your email"
                 required
               />
@@ -76,15 +128,17 @@ const LogIn = () => {
 
             {/* Password */}
             <div className="relative">
-              <label className="label font-semibold text-sm">Password</label>
+              <label className="label font-semibold text-sm text-base-content/90">
+                Password
+              </label>
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                className="input input-bordered w-full pr-10"
+                className="input input-bordered w-full bg-base-200 pr-10 focus:outline-none"
                 placeholder="Enter your password"
                 required
               />
-              <span className="absolute top-8 right-3 cursor-pointer text-gray-600">
+              <span className="absolute top-8 right-3 cursor-pointer text-base-content/70 hover:text-primary">
                 {showPassword ? (
                   <BsFillEyeFill onClick={() => setShowPassword(false)} />
                 ) : (
@@ -94,10 +148,12 @@ const LogIn = () => {
             </div>
 
             {/* Login Button */}
-            <button className="btn btn-neutral w-full mt-3">Log In</button>
+            <button className="btn btn-primary w-full mt-3 text-white">
+              Log In
+            </button>
 
             {/* Divider */}
-            <div className="divider text-gray-400">OR</div>
+            <div className="divider text-base-content/70">OR</div>
 
             {/* Google Login Button */}
             <button
@@ -112,9 +168,9 @@ const LogIn = () => {
         </form>
 
         <div className="mt-4 text-center">
-          <p className="text-sm">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-blue-500 underline">
+          <p className="text-sm text-base-content/80">
+            Don’t have an account?{" "}
+            <Link to="/register" className="text-primary font-semibold">
               Register
             </Link>{" "}
             here

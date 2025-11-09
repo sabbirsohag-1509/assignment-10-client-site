@@ -62,8 +62,8 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="flex items-center">
-          <img src={logoImg} alt="Logo" className="w-14" />
-          <span className="font-bold text-2xl">Home Nest</span>
+          <img src={logoImg} alt="Logo" className="w-12 md:w-14" />
+          <span className="  font-bold text-xl md:text-2xl">Home Nest</span>
         </Link>
       </div>
 
@@ -76,11 +76,11 @@ const Navbar = () => {
       <div className="navbar-end">
         {!user ? (
           <>
-            <NavLink to="/register" className="mx-2 btn btn-outline btn-sm">
+            <NavLink to="/register" className="mx-2 btn btn-outline btn-sm bg-blue-600 text-white hover:bg-blue-700">
               Sign Up
             </NavLink>
-            <NavLink to="/login" className="mx-2 btn btn-neutral btn-sm">
-              Login
+            <NavLink to="/login" className="mx-2 btn btn-outline btn-sm bg-blue-600 text-white hover:bg-blue-700">
+              LogIn
             </NavLink>
           </>
         ) : (
@@ -95,7 +95,7 @@ const Navbar = () => {
                 <span className="font-semibold hover:bg-blue-600 hover:text-white">{user.displayName}</span>
               </li>
               <li>
-                <span className="text-sm text-gray-500 hover:bg-blue-600 hover:text-white">{user.email}</span>
+                <span className="text-sm text-gray-600 hover:bg-blue-600 hover:text-white">{user.email}</span>
               </li>
               <li>
                 <button onClick={handleLogout} className="btn btn-outline btn-sm w-full mt-2 hover:bg-blue-600 hover:text-white">
