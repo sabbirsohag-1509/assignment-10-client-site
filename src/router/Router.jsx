@@ -3,6 +3,7 @@ import Root from "../pages/Root/Root";
 import Home from "../pages/Home/Home";
 import Register from "../pages/SignUp/Register";
 import LogIn from "../pages/LogIn/LogIn";
+import AddProperty from "../pages/AddProperty/AddProperty";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
             Component: LogIn
         },
         {
-            
+          path: "/add-property",
+          element: <AddProperty></AddProperty>
         }
     ],
   },
