@@ -110,8 +110,8 @@ const AddProperty = () => {
             value={formData.propertyName}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Your Property Name"
-                      required
+            placeholder="Your Property Name"
+            required
           />
         </div>
 
@@ -138,16 +138,15 @@ const AddProperty = () => {
           <select
             name="category"
             value={formData.category}
-                      onChange={handleChange}
-                      required
+            onChange={handleChange}
+            required
             className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Category</option>
             <option value="Rent">Rent</option>
             <option value="Sale">Sale</option>
             <option value="Commercial">Commercial</option>
-                      <option value="Land">Land</option>
-                    
+            <option value="Land">Land</option>
           </select>
         </div>
 
@@ -162,8 +161,8 @@ const AddProperty = () => {
             value={formData.price}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Your Property Price"
-                      required
+            placeholder="Your Property Price"
+            required
           />
         </div>
 

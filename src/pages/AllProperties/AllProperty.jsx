@@ -1,11 +1,13 @@
-import React from "react";
+import React from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 import { MapPin, Info } from "lucide-react";
 import { TbCurrencyTaka } from "react-icons/tb";
+import Loading from './../../components/Loading/Loading';
 
-const FeaturedProperty = ({ property }) => {
-  const {
+const AllProperty = ({ property }) => {
+    // console.log(property)
+    const {
     _id,
     propertyName,
     category,
@@ -14,10 +16,10 @@ const FeaturedProperty = ({ property }) => {
     area,
     price,
     imageURL,
-  } = property;
-
-  return (
-    <motion.div
+    } = property;
+   
+    return (
+         <motion.div
       whileHover={{ scale: 1.03, y: -5 }}
       transition={{ duration: 0.3 }}
       className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-200"
@@ -75,7 +77,7 @@ const FeaturedProperty = ({ property }) => {
         </div>
       </div>
     </motion.div>
-  );
+    );
 };
 
-export default FeaturedProperty;
+export default AllProperty;
