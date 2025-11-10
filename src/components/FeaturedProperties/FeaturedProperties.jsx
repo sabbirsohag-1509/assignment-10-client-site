@@ -27,7 +27,7 @@ const FeaturedProperties = () => {
   return (
     <div className="max-w-6xl mx-auto px-4">
       <div className="text-center my-8">
-        <h2 className="text-3xl font-bold mb-4">Featured Properties</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">Featured Properties</h2>
         <p className="text-[12px] md:text-sm">
           Discover our handpicked selection of premium real estate listings,
           showcasing the best homes and investment opportunities available.
