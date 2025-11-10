@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import bgImg from "../../assets/bgImg.jpg";
 import Loading from "../../components/Loading/Loading";
+import { useNavigate } from "react-router";
 
 const AddProperty = () => {
   const { user } = useContext(AuthContext);
@@ -19,6 +20,7 @@ const AddProperty = () => {
     address: "",
     imageURL: "",
   });
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
@@ -60,6 +62,7 @@ const AddProperty = () => {
         timer: 1500,
         showConfirmButton: false,
       });
+      navigate("/my-properties");
 
       setFormData({
         propertyName: "",

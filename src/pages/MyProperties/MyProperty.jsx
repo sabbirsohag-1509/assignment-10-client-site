@@ -1,17 +1,31 @@
-import React from "react";
 import { MapPin, Info, Pencil, Trash2 } from "lucide-react";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { MdEmail } from "react-icons/md";
 import { Link } from "react-router";
-import PropertyDetails from "./../PropertyDetails/PropertyDetails";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const MyProperty = ({ property }) => {
+const MyProperty = ({ property, setProperties }) => {
   const { propertyName, category, price, city, area, postedDate, imageURL } =
     property;
 
-  // const updateBtnHandler = () => {
-
-  // }
+  const deleteBtnHandler = async () => {
+    await axios
+      .delete(`http://localhost:5000/properties/${property._id}`)
+      .then((res) => {
+        if (res.data.deletedCount > 0) {
+          Swal.fire({
+            icon: "success",
+            title: "Property Deleted!",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+          setProperties((prevProperties) =>
+            prevProperties.filter((p) => p._id !== property._id)
+          );
+        }
+      });
+  };
 
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-md transform transition-transform duration-300 hover:scale-105">
@@ -62,11 +76,17 @@ const MyProperty = ({ property }) => {
             <Info size={18} /> Details
           </Link>
 
-          <Link to={`/update-properties/${property._id}`} className="flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg text-sm font-medium w-full sm:w-36 justify-center">
+          <Link
+            to={`/update-properties/${property._id}`}
+            className="flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg text-sm font-medium w-full sm:w-36 justify-center"
+          >
             <Pencil size={16} /> Update
           </Link>
 
-          <button className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg text-sm font-medium w-full sm:w-36 justify-center">
+          <button
+            onClick={deleteBtnHandler}
+            className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg text-sm font-medium w-full sm:w-36 justify-center"
+          >
             <Trash2 size={16} /> Delete
           </button>
         </div>

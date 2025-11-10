@@ -40,7 +40,7 @@ const MyProperties = () => {
             <h3 className="text-xl text-blue-700">You have not added any properties yet.</h3>
           </div>
         ) : (
-          properties.map((property) => <MyProperty key={property._id} property={property}></MyProperty>)
+          properties.map((property) => <MyProperty key={property._id} setProperties={setProperties} property={property}></MyProperty>)
         )}
       </div>
     </div>

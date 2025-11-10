@@ -5,34 +5,35 @@ import { IoClose } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Loading from "../../components/Loading/Loading";
 
 const UpdateProperties = () => {
   const { user } = use(AuthContext);
   const navigate = useNavigate();
-    const { id } = useParams();
-    const [property, setProperty] = useState(null);
-    
+  const { id } = useParams();
+  const [property, setProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => { 
-        fetch(`http://localhost:5000/properties/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                setProperty(data);
-        })
-     },[id])
+  useEffect(() => {
+    fetch(`http://localhost:5000/propertyDetails/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProperty(data);
+        console.log(data);
+        setLoading(false);
+      });
+  }, [id]);
 
-    
-
-
-
-    //submit handler //
+  //submit handler //
   const formHandleSubmit = async (e) => {
     e.preventDefault();
     const propertyName = e.target.propertyName.value;
     const description = e.target.description.value;
     const category = e.target.category.value;
     const price = e.target.price.value;
-    const location = e.target.location.value;
+    const city = e.target.city.value;
+    const area = e.target.area.value;
+    const address = e.target.address.value;
     const imageLink = e.target.imageLink.value;
     // console.log(propertyName, description, category, price, location, imageLink);
     const updatedProperty = {
@@ -41,6 +42,9 @@ const UpdateProperties = () => {
       category,
       price,
       location,
+      city,
+      area,
+      address,
       imageLink,
     };
     // console.log(updatedProperty);
@@ -66,6 +70,14 @@ const UpdateProperties = () => {
       console.error("Update error:", error);
     }
   };
+
+  if (loading) {
+    return (
+      <div>
+        <Loading></Loading>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -101,7 +113,7 @@ const UpdateProperties = () => {
           <textarea
             name="description"
             rows="4"
-            placeholder="Write short description..."
+            defaultValue={property?.description}
             className="w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
         </div>
@@ -111,6 +123,7 @@ const UpdateProperties = () => {
           <label className="block text-gray-300 mb-1">Category</label>
           <select
             name="category"
+            defaultValue={property?.category}
             className="w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Category</option>
@@ -127,20 +140,46 @@ const UpdateProperties = () => {
           <input
             type="number"
             name="price"
-            placeholder="Enter property price"
+            defaultValue={property?.price}
             className="w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
         {/* Location */}
-        <div>
-          <label className="block text-gray-300 mb-1">Location</label>
-          <input
-            type="text"
-            name="location"
-            placeholder="Enter property location"
-            className="w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-gray-700 dark:text-gray-200 mb-1">
+              City
+            </label>
+            <input
+              type="text"
+              name="city"
+              defaultValue={property?.city}
+              className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 dark:text-gray-200 mb-1">
+              Area
+            </label>
+            <input
+              type="text"
+              name="area"
+              defaultValue={property?.area}
+              className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 dark:text-gray-200 mb-1">
+              Address
+            </label>
+            <input
+              type="text"
+              name="address"
+              defaultValue={property?.address}
+              className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
         </div>
 
         {/* Image Link */}
@@ -149,7 +188,7 @@ const UpdateProperties = () => {
           <input
             type="text"
             name="imageLink"
-            placeholder="Enter image URL"
+            defaultValue={property?.imageURL}
             className="w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -180,23 +219,26 @@ const UpdateProperties = () => {
 
         {/* Submit Button */}
         <div className="flex justify-between items-center">
-          <button
-            type="submit"
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-all duration-200 cursor-pointer"
-          >
-            Update Property
-          </button>
+          <div>
+            <button
+              type="submit"
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-all duration-200 cursor-pointer"
+            >
+              Update Property
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => navigate(-1)}
+              type="button"
+              className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition-all duration-200 flex items-center cursor-pointer"
+            >
+              <IoClose />
+              Close
+            </button>
+          </div>
         </div>
       </form>
-      {/* <div>
-        <button
-          onClick={() => navigate(-1)}
-          className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition-all duration-200 flex items-center cursor-pointer"
-        >
-          <IoClose />
-          Close
-        </button>
-      </div> */}
     </div>
   );
 };
