@@ -9,23 +9,46 @@ const MyProperty = ({ property, setProperties }) => {
   const { propertyName, category, price, city, area, postedDate, imageURL } =
     property;
 
-  const deleteBtnHandler = async () => {
-    await axios
-      .delete(`http://localhost:5000/properties/${property._id}`)
-      .then((res) => {
-        if (res.data.deletedCount > 0) {
-          Swal.fire({
-            icon: "success",
-            title: "Property Deleted!",
-            timer: 1500,
-            showConfirmButton: false,
-          });
-          setProperties((prevProperties) =>
-            prevProperties.filter((p) => p._id !== property._id)
-          );
-        }
+const deleteBtnHandler = async () => {
+  const confirmDelete = await Swal.fire({
+    title: "Are you sure?",
+    text: "This property will be permanently deleted!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!",
+  });
+
+  if (confirmDelete.isConfirmed) {
+    try {
+      const res = await axios.delete(
+        `http://localhost:5000/properties/${property._id}`
+      );
+
+      if (res.data.deletedCount > 0) {
+        Swal.fire({
+          icon: "success",
+          title: "Deleted!",
+          text: "Property has been deleted successfully.",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        setProperties((prevProperties) =>
+          prevProperties.filter((p) => p._id !== property._id)
+        );
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Delete Failed",
+        text: "Something went wrong! Please try again later.",
       });
-  };
+    }
+  }
+};
+
 
   return (
     <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-md transform transition-transform duration-300 hover:scale-105">
