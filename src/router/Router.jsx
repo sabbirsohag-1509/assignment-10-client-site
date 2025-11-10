@@ -7,6 +7,7 @@ import AddProperty from "../pages/AddProperty/AddProperty";
 import AllProperties from "../pages/AllProperties/AllProperties";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import PrivateRoute from "../pages/Context-Provider/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-property",
-        element: <AddProperty></AddProperty>,
+        element: <PrivateRoute><AddProperty></AddProperty></PrivateRoute>,
       },
       {
         path: "/all-properties",
@@ -35,8 +36,11 @@ const router = createBrowserRouter([
       },
       { 
         path: "propertyDetails/:id",
-        element: <PropertyDetails></PropertyDetails>
+        element: <PrivateRoute><PropertyDetails></PropertyDetails></PrivateRoute>
       },
+      {
+
+      }
     ],
   },
   {

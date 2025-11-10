@@ -3,7 +3,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Context-Provider/AuthContext";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, useLocation } from "react-router";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -13,8 +13,9 @@ const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { logInInfo, googleLoginInfo } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Email/password login
+  //// Email/password login ////
   const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -31,14 +32,14 @@ const LogIn = () => {
       });
 
       e.target.reset();
-      navigate("/");
+      navigate(location?.state || "/");
     } catch (error) {
       console.log("Login error:", error.message);
       Swal.fire("Error", error.message, "error");
     }
   };
 
-  // Google login
+  //// Google login ////
   const handleGoogleLogin = async () => {
     try {
       const result = await googleLoginInfo();
@@ -50,14 +51,14 @@ const LogIn = () => {
         text: `Welcome, ${user.displayName || user.email}`,
       });
 
-      navigate("/");
+      navigate(location?.state || "/");
     } catch (error) {
       console.log("Google login error:", error.message);
       Swal.fire("Error", error.message, "error");
     }
   };
 
-  // Slider settings
+  //// Slider settings /////
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -71,40 +72,47 @@ const LogIn = () => {
 
   return (
     <div className="flex flex-col lg:flex-row justify-center items-center min-h-screen bg-base-200 transition-colors duration-300 p-4 gap-10">
-      {/* ---------- Left Side: Slider ---------- */}
+      {/* Left Side: Slider*/}
       <div className="w-full lg:w-1/2 max-w-xl">
         <Slider {...sliderSettings}>
           <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-10 rounded-2xl text-center shadow-lg">
             <h2 className="text-3xl font-bold text-primary mb-3 flex items-center justify-center gap-2">
               Welcome to Home Nest
-              <img className="w-16 h-16 object-contain" src={logoImg} alt="logo" />
+              <img
+                className="w-16 h-16 object-contain"
+                src={logoImg}
+                alt="logo"
+              />
             </h2>
             <p className="text-base-content/80">
-              Discover your perfect home easily. Explore modern, comfortable, and affordable properties today.
+              Discover your perfect home easily. Explore modern, comfortable,
+              and affordable properties today.
             </p>
           </div>
 
           <div className="bg-gradient-to-r from-success/10 to-success/5 p-10 rounded-2xl text-center shadow-lg">
             <h2 className="text-3xl font-bold text-success mb-3">
-              Smart Search & Filters 🔍
+              Smart Search & Filters
             </h2>
             <p className="text-base-content/80">
-              Find homes that match your budget, location, and lifestyle effortlessly.
+              Find homes that match your budget, location, and lifestyle
+              effortlessly.
             </p>
           </div>
 
           <div className="bg-gradient-to-r from-warning/10 to-warning/5 p-10 rounded-2xl text-center shadow-lg">
             <h2 className="text-3xl font-bold text-warning mb-3">
-              Trusted Agents 🤝
+              Trusted Agents & Landlords
             </h2>
             <p className="text-base-content/80">
-              Connect with verified agents and landlords for a safe and transparent experience.
+              Connect with verified agents and landlords for a safe and
+              transparent experience.
             </p>
           </div>
         </Slider>
       </div>
 
-      {/* ---------- Right Side: Login Form ---------- */}
+      {/* Right Side: Login Form*/}
       <div className="bg-base-100 shadow-2xl rounded-2xl w-full max-w-md p-8 border border-base-300 transition-colors duration-300">
         <h1 className="text-3xl font-bold text-center text-base-content mb-6">
           Welcome Back
