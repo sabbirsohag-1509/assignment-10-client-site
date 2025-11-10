@@ -9,6 +9,7 @@ import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivateRoute from "../pages/Context-Provider/PrivateRoute";
 import MyProperties from "../pages/MyProperties/MyProperties";
+import UpdateProperties from "../pages/UpdateProperties/UpdateProperties";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/my-properties",
         element: <PrivateRoute><MyProperties></MyProperties></PrivateRoute>,
+      },
+      {
+        path: "/update-properties/:id",
+        element: <UpdateProperties></UpdateProperties>
       }
     ],
   },
