@@ -31,7 +31,13 @@ const MyProperties = () => {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="text-center my-8">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">My Properties</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
+          My <span className="text-blue-600">Properties</span>
+          {/* Outer border */}
+          <span className="absolute inset-0 border-2 border-blue-600 rounded-lg pointer-events-none -z-10"></span>
+          {/* Inner border */}
+          <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-10"></span>
+        </h2>
       </div>
                   {/* //////////// */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">

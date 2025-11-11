@@ -6,52 +6,50 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const MyProperty = ({ property, setProperties }) => {
-  const { propertyName, category, price, city, area, postedDate, imageURL } =
-    property;
+  const { propertyName, category, price, city, area, postedDate, imageURL } = property;
 
-const deleteBtnHandler = async () => {
-  const confirmDelete = await Swal.fire({
-    title: "Are you sure?",
-    text: "This property will be permanently deleted!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#d33",
-    cancelButtonColor: "#3085d6",
-    confirmButtonText: "Yes, delete it!",
-  });
+  /// Delete Handler
+  const deleteBtnHandler = async () => {
+    const confirmDelete = await Swal.fire({
+      title: "Are you sure?",
+      text: "This property will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-  if (confirmDelete.isConfirmed) {
-    try {
-      const res = await axios.delete(
-        `http://localhost:5000/properties/${property._id}`
-      );
+    if (confirmDelete.isConfirmed) {
+      try {
+        const res = await axios.delete(`http://localhost:5000/properties/${property._id}`);
 
-      if (res.data.deletedCount > 0) {
+        if (res.data.deletedCount > 0) {
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "Property has been deleted successfully.",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+          setProperties((prevProperties) =>
+            prevProperties.filter((p) => p._id !== property._id)
+          );
+        }
+      } catch (error) {
+        console.error("Delete error:", error);
         Swal.fire({
-          icon: "success",
-          title: "Deleted!",
-          text: "Property has been deleted successfully.",
-          timer: 1500,
-          showConfirmButton: false,
+          icon: "error",
+          title: "Delete Failed",
+          text: "Something went wrong! Please try again later.",
         });
-        setProperties((prevProperties) =>
-          prevProperties.filter((p) => p._id !== property._id)
-        );
       }
-    } catch (error) {
-      console.error("Delete error:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Delete Failed",
-        text: "Something went wrong! Please try again later.",
-      });
     }
-  }
-};
-
+  };
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-md transform transition-transform duration-300 hover:scale-105">
+    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-md transform transition-transform duration-300 hover:scale-105">
+      
       {/* Image */}
       <div className="relative">
         <img
@@ -63,30 +61,22 @@ const deleteBtnHandler = async () => {
 
       {/* Details */}
       <div className="p-6 space-y-3">
-        <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
-          {propertyName}
-        </h2>
+        <h2 className="text-2xl font-semibold text-gray-800">{propertyName}</h2>
 
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          Category: {category}
-        </p>
+        <p className="text-sm text-gray-500">Category: {category}</p>
 
-        <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
+        <div className="flex items-center gap-1 text-gray-600">
           <MapPin size={16} />
-          <span>
-            {city}, {area}
-          </span>
+          <span>{city}, {area}</span>
         </div>
 
-        <p className="flex items-center gap-1 text-gray-800 dark:text-gray-100 font-semibold">
+        <p className="flex items-center gap-1 text-gray-800 font-semibold">
           <TbCurrencyTaka className="text-xl" /> {price}/=
         </p>
 
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          Posted on: {new Date(postedDate).toLocaleDateString()}
-        </p>
+        <p className="text-xs text-gray-500">Posted on: {new Date(postedDate).toLocaleDateString()}</p>
 
-        <p className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-0.5">
+        <p className="text-xs text-gray-500 flex items-center gap-0.5">
           <MdEmail /> {property.userEmail}
         </p>
 
