@@ -89,7 +89,7 @@ const PropertyDetails = () => {
           <div className="flex justify-between items-center border-t border-base-300 pt-4">
             <p className="text-xl font-semibold text-primary flex items-center">
               <TbCurrencyTaka size={22} />
-              {property.price.toLocaleString()}
+              {property.price.toLocaleString()}/=
             </p>
             <span className="badge badge-primary badge-outline px-3 py-3 font-semibold">
               {property.category}

@@ -60,21 +60,21 @@ const MyProperty = ({ property, setProperties }) => {
       </div>
 
       {/* Details */}
-      <div className="p-6 space-y-3">
-        <h2 className="text-2xl font-semibold text-gray-800">{propertyName}</h2>
+      <div className="p-6 space-y-3 dark:bg-gray-800">
+        <h2 className="text-2xl font-semibold text-gray-800 dark:text-white ">{propertyName}</h2>
 
-        <p className="text-sm text-gray-500">Category: {category}</p>
+        <p className="text-sm text-gray-500 dark:text-white">Category: {category}</p>
 
-        <div className="flex items-center gap-1 text-gray-600">
+        <div className="flex items-center gap-1 text-gray-600 dark:text-white">
           <MapPin size={16} />
           <span>{city}, {area}</span>
         </div>
 
-        <p className="flex items-center gap-1 text-gray-800 font-semibold">
+        <p className="flex items-center gap-1 text-gray-800 dark:text-white font-semibold">
           <TbCurrencyTaka className="text-xl" /> {price}/=
         </p>
 
-        <p className="text-xs text-gray-500">Posted on: {new Date(postedDate).toLocaleDateString()}</p>
+        <p className="text-xs text-gray-500 dark:text-white">Posted on: {new Date(postedDate).toLocaleDateString()}</p>
 
         <p className="text-xs text-gray-500 flex items-center gap-0.5">
           <MdEmail /> {property.userEmail}

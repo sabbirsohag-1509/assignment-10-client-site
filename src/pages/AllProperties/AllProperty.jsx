@@ -7,7 +7,7 @@ const AllProperty = ({ property }) => {
   const { _id, propertyName, category, description, city, area, price, imageURL } = property;
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg border border-gray-200 transform hover:-translate-y-1 hover:scale-105 transition-all duration-500">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-lg border border-gray-200 transform hover:-translate-y-1 hover:scale-105 transition-all duration-500">
       
       {/* Image */}
       <div className="relative h-56 w-full overflow-hidden">
@@ -23,21 +23,21 @@ const AllProperty = ({ property }) => {
 
       {/* Content */}
       <div className="p-5 flex flex-col justify-between h-[260px]">
-        <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-1">
+        <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2 line-clamp-1">
           {propertyName}
         </h3>
 
-        <p className="text-gray-600 text-sm line-clamp-3 mb-4 leading-relaxed">
+        <p className="text-gray-600 dark:text-white text-sm line-clamp-3 mb-4 leading-relaxed">
           {description?.length > 80 ? description.slice(0, 80) + "..." : description}
         </p>
 
-        <div className="flex items-center text-gray-500 text-sm mb-3">
-          <MapPin size={16} className="mr-1 text-blue-500" />
+        <div className="flex items-center text-gray-500 text-sm mb-3 dark:text-white">
+          <MapPin size={16} className="mr-1 text-blue-500 dark:text-white" />
           <span className="truncate">{area}, {city}</span>
         </div>
 
         <div className="flex justify-between items-center">
-          <p className="text-lg font-semibold text-blue-600 flex items-center">
+          <p className="text-lg font-semibold text-blue-600 flex items-center dark:text-white">
             <TbCurrencyTaka className="mr-1" />
             {price.toLocaleString()}/=
           </p>

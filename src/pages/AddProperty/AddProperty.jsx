@@ -92,12 +92,12 @@ const AddProperty = () => {
       style={{ backgroundImage: `url(${bgImg})` }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-black/30"></div>
 
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="relative w-full max-w-3xl bg-white/90 dark:bg-gray-800/90 shadow-lg rounded-lg p-8 space-y-6 z-10"
+        className="relative w-full max-w-3xl bg-white/80 dark:bg-gray-800/80 shadow-lg rounded-lg p-8 space-y-6 z-10"
       >
         <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 text-center">
           Add New Property
