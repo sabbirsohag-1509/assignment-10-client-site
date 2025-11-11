@@ -5,6 +5,8 @@ import Loading from "./../Loading/Loading";
 const FeaturedProperties = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingg, setLoadingg] = useState(false);
+  const [sortOption, setSortOption] = useState("")
 
   useEffect(() => {
     fetch(`http://localhost:5000/latest-properties`)
@@ -19,17 +21,27 @@ const FeaturedProperties = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const search_text = e.target.search.value;
+    setLoadingg(true);
     console.log("Searching for:", search_text);
     fetch(`http://localhost:5000/search?search=${search_text}`)
       .then((res) => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setProperties(data);
-        // setLoading(false);
+        setLoadingg(false);
       })
   };
 
-
+  // Sort handler
+  const handleSortChange = (sortValue) => {
+    setSortOption(sortValue);
+    fetch(`http://localhost:5000/sort-properties?sort=${sortValue}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setProperties(data)
+    })
+  }
  
 
   if (loading) {
@@ -63,13 +75,13 @@ const FeaturedProperties = () => {
               className="input input-bordered w-60 md:w-64 lg:w-72 ml-8 md:ml-0 pr-10 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 rounded-l-xl"
             />
             <button className="btn absolute top-1/2 -translate-y-1/2 px-2 md:px-5 py-2 bg-blue-600 text-white rounded-xl rounded-l-none hover:bg-blue-700 transition-colors duration-300">
-              {loading ? "Searching..." : "Search"}
+              {loadingg ? "Searching..." : "Search"}
             </button>
           </form>
         </div>
 
         {/* Sort */}
-        <select className="select select-bordered w-60 md:w-64 lg:w-72 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 rounded-xl">
+        <select onChange={(e) => handleSortChange(e.target.value)} className="select select-bordered w-60 md:w-64 lg:w-72 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 rounded-xl">
           <option disabled selected>
             Sort By
           </option>
