@@ -14,10 +14,12 @@ const LogIn = () => {
   const { logInInfo, googleLoginInfo } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
   //// Email/password login ////
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -37,6 +39,7 @@ const LogIn = () => {
       console.log("Login error:", error.message);
       Swal.fire("Error", error.message, "error");
     }
+    setLoading(false);
   };
 
   //// Google login ////
@@ -157,7 +160,7 @@ const LogIn = () => {
 
             {/* Login Button */}
             <button className="btn btn-primary w-full mt-3 text-white">
-              Log In
+             { loading ? 'Logging In....' : 'Log In' }
             </button>
 
             {/* Divider */}

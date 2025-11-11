@@ -42,8 +42,8 @@ const MyProperties = () => {
                   {/* //////////// */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {properties.length === 0 ? (
-          <div className="text-center">
-            <h3 className="text-xl text-blue-700">You have not added any properties yet.</h3>
+          <div className="flex justify-center items-center col-span-full">
+            <h3 className="text-xl text-blue-600">You have not added any properties yet. <span className="font-bold text-blue-700">{ user.displayName }</span> </h3>
           </div>
         ) : (
           properties.map((property) => <MyProperty key={property._id} setProperties={setProperties} property={property}></MyProperty>)
