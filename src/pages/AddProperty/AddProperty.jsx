@@ -81,6 +81,14 @@ const AddProperty = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div> 
+        <Loading></Loading>
+      </div> 
+    );
+  }
+
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center relative"
