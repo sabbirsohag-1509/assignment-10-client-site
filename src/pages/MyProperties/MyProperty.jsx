@@ -6,7 +6,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const MyProperty = ({ property, setProperties }) => {
-  const { propertyName, category, price, city, area, postedDate, imageURL } = property;
+  const { propertyName, category, price, city, area, postedDate, imageURL } =
+    property;
 
   /// Delete Handler
   const deleteBtnHandler = async () => {
@@ -22,7 +23,9 @@ const MyProperty = ({ property, setProperties }) => {
 
     if (confirmDelete.isConfirmed) {
       try {
-        const res = await axios.delete(`http://localhost:5000/properties/${property._id}`);
+        const res = await axios.delete(
+          `http://localhost:5000/properties/${property._id}`
+        );
 
         if (res.data.deletedCount > 0) {
           Swal.fire({
@@ -49,10 +52,8 @@ const MyProperty = ({ property, setProperties }) => {
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-md transform transition-transform duration-300 hover:scale-105">
-      <title> 
-        {propertyName} - My Property
-      </title>
-      
+      <title>{propertyName} - My Property</title>
+
       {/* Image */}
       <div className="relative">
         <img
@@ -64,20 +65,28 @@ const MyProperty = ({ property, setProperties }) => {
 
       {/* Details */}
       <div className="p-6 space-y-3 dark:bg-gray-800">
-        <h2 className="text-2xl font-semibold text-gray-800 dark:text-white ">{propertyName}</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 dark:text-white ">
+          {propertyName}
+        </h2>
 
-        <p className="text-sm text-gray-500 dark:text-white">Category: {category}</p>
+        <p className="text-sm text-gray-500 dark:text-white">
+          Category: {category}
+        </p>
 
         <div className="flex items-center gap-1 text-gray-600 dark:text-white">
           <MapPin size={16} />
-          <span>{city}, {area}</span>
+          <span>
+            {city}, {area}
+          </span>
         </div>
 
         <p className="flex items-center gap-1 text-gray-800 dark:text-white font-semibold">
           <TbCurrencyTaka className="text-xl" /> {price}/=
         </p>
 
-        <p className="text-xs text-gray-500 dark:text-white">Posted on: {new Date(postedDate).toLocaleDateString()}</p>
+        <p className="text-xs text-gray-500 dark:text-white">
+          Posted on: {new Date(postedDate).toLocaleDateString()}
+        </p>
 
         <p className="text-xs text-gray-500 flex items-center gap-0.5">
           <MdEmail /> {property.userEmail}

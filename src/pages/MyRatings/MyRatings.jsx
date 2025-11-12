@@ -2,6 +2,8 @@ import React, { use, useEffect, useState } from "react";
 import { Rating, Star } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { AuthContext } from "../Context-Provider/AuthContext";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const MyRatings = () => {
   const { user } = use(AuthContext);
@@ -9,15 +11,50 @@ const MyRatings = () => {
 
   useEffect(() => {
     if (!user?.email) return;
+
     fetch(`http://localhost:5000/review/${user.email}`)
       .then((res) => res.json())
       .then((data) => setReviews(data))
       .catch((err) => console.error("Error fetching reviews:", err));
   }, [user]);
-    
-    const deleteReviewBtnHandler = () => {
-        
+
+    const handleDeleteReview = async (reviewId) => {
+  // 1. Confirm dialog (optional but recommended)
+  const confirm = await Swal.fire({
+    title: "Are you sure?",
+    text: "This review will be permanently deleted!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#2563eb",
+    cancelButtonColor: "#6b7280",
+    confirmButtonText: "Yes, delete it!",
+  });
+
+  if (!confirm.isConfirmed) return; // যদি cancel করে, exit
+
+  try {
+    // 2. Send DELETE request to your API
+    const res = await axios.delete(`http://localhost:5000/review/${reviewId}`);
+
+    // 3. Update state
+    if (res.data.deletedCount > 0) {
+      setReviews((prev) => prev.filter((r) => r._id !== reviewId));
+      Swal.fire({
+        icon: "success",
+        title: "Review Deleted!",
+        timer: 1500,
+        showConfirmButton: false,
+      });
     }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
+      text: error.message,
+    });
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 py-10 px-3 sm:px-6 lg:px-10">
@@ -80,7 +117,10 @@ const MyRatings = () => {
                     </div>
                   </div>
 
-                  <button onClick={deleteReviewBtnHandler} className="bg-red-500 hover:bg-red-600 text-white text-xs sm:text-sm font-semibold px-3 py-1 rounded-md shadow transition-all duration-300">
+                  <button
+                    onClick={() =>handleDeleteReview(review._id)}
+                    className="bg-red-500 hover:bg-red-600 text-white text-xs sm:text-sm font-semibold px-3 py-1 rounded-md shadow transition-all duration-300 cursor-pointer"
+                  >
                     Delete
                   </button>
                 </div>
