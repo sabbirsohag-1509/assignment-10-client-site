@@ -4,6 +4,7 @@ import Loading from "../../components/Loading/Loading";
 import { MapPin, User, CalendarDays, Star } from "lucide-react";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import ReviewForm from "../../components/ReviewForm/ReviewForm";
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -102,38 +103,9 @@ const PropertyDetails = () => {
       </div>
 
       {/* Ratings & Reviews Section */}
-      <div className="mt-10 bg-base-200 p-6 rounded-2xl shadow-md border border-base-300">
-        <h3 className="text-2xl font-bold mb-4 text-base-content">
-          Rating & Reviews.........
-        </h3>
+            <ReviewForm property={property}></ReviewForm>
 
-        {property?.ratings && property.ratings.length > 0 ? (
-          <div className="space-y-5">
-            {property.ratings.map((r, index) => (
-              <div
-                key={index}
-                className="border-b border-base-300 pb-4 last:border-0"
-              >
-                <div className="flex items-center mb-1">
-                  {[...Array(r.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={18}
-                      className="text-yellow-400 fill-yellow-400"
-                    />
-                  ))}
-                </div>
-                <p className="text-base-content/90">{r.review}</p>
-                <p className="text-sm text-base-content/70 mt-1">— {r.user}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-base-content/70">
-            No reviews yet. Be the first to review!
-          </p>
-        )}
-      </div>
+      {/* /// */}
     </div>
   );
 };
