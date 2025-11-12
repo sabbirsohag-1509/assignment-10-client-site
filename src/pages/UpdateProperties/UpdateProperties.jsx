@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Loading from "../../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const UpdateProperties = () => {
   const { user } = use(AuthContext);
@@ -84,6 +85,9 @@ const UpdateProperties = () => {
       className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center relative"
       style={{ backgroundImage: `url(${bgImg})` }}
     >
+      <Helmet> 
+        <title>Update Property - HomeNest</title>
+      </Helmet>
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60"></div>
 
@@ -92,9 +96,15 @@ const UpdateProperties = () => {
         onSubmit={formHandleSubmit}
         className="relative w-full max-w-3xl bg-gray-900/90 text-gray-100 shadow-2xl rounded-lg p-8 space-y-6 z-10 transition-transform duration-300 hover:scale-[1.01]"
       >
-        <h2 className="text-3xl font-bold text-center mb-6">
-          Update Property Information
+         <div className="text-center my-8 relative z-10">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
+          Update Property <span className="text-blue-600">Information</span>
+          {/* Outer border */}
+          <span className="absolute inset-0 border-2 border-blue-600 rounded-lg pointer-events-none -z-0"></span>
+          {/* Inner border */}
+          <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-0"></span>
         </h2>
+      </div>
 
         {/* Property Name */}
         <div>

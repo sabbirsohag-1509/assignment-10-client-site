@@ -2,13 +2,22 @@ import React from "react";
 import { Link } from "react-router";
 import { MapPin, Info } from "lucide-react";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { Helmet } from "react-helmet-async";
 
 const AllProperty = ({ property }) => {
-  const { _id, propertyName, category, description, city, area, price, imageURL } = property;
+  const {
+    _id,
+    propertyName,
+    category,
+    description,
+    city,
+    area,
+    price,
+    imageURL,
+  } = property;
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-lg border border-gray-200 transform hover:-translate-y-1 hover:scale-105 transition-all duration-500">
-      
       {/* Image */}
       <div className="relative h-56 w-full overflow-hidden">
         <img
@@ -28,12 +37,16 @@ const AllProperty = ({ property }) => {
         </h3>
 
         <p className="text-gray-600 dark:text-white text-sm line-clamp-3 mb-4 leading-relaxed">
-          {description?.length > 80 ? description.slice(0, 80) + "..." : description}
+          {description?.length > 80
+            ? description.slice(0, 80) + "..."
+            : description}
         </p>
 
         <div className="flex items-center text-gray-500 text-sm mb-3 dark:text-white">
           <MapPin size={16} className="mr-1 text-blue-500 dark:text-white" />
-          <span className="truncate">{area}, {city}</span>
+          <span className="truncate">
+            {area}, {city}
+          </span>
         </div>
 
         <div className="flex justify-between items-center">

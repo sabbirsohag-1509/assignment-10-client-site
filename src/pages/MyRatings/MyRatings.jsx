@@ -4,63 +4,90 @@ import "@smastrom/react-rating/style.css";
 import { AuthContext } from "../Context-Provider/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
+import Loading from "../../components/Loading/Loading";
+
 
 const MyRatings = () => {
   const { user } = use(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!user?.email) return;
-
+    setLoading(true);
     fetch(`http://localhost:5000/review/${user.email}`)
       .then((res) => res.json())
-      .then((data) => setReviews(data))
-      .catch((err) => console.error("Error fetching reviews:", err));
+      .then(data => {
+        setReviews(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error);
+        setLoading(false);
+      });
   }, [user]);
 
-    const handleDeleteReview = async (reviewId) => {
-  // 1. Confirm dialog (optional but recommended)
-  const confirm = await Swal.fire({
-    title: "Are you sure?",
-    text: "This review will be permanently deleted!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#2563eb",
-    cancelButtonColor: "#6b7280",
-    confirmButtonText: "Yes, delete it!",
-  });
+    // Delete Review Handler
+  const handleDeleteReview = async (reviewId) => {
+    const confirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "This review will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#2563eb",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-  if (!confirm.isConfirmed) return; // যদি cancel করে, exit
+    if (!confirm.isConfirmed) return;
 
-  try {
-    // 2. Send DELETE request to your API
-    const res = await axios.delete(`http://localhost:5000/review/${reviewId}`);
+    try {
+      const res = await axios.delete(
+        `http://localhost:5000/review/${reviewId}`
+      );
 
-    // 3. Update state
-    if (res.data.deletedCount > 0) {
-      setReviews((prev) => prev.filter((r) => r._id !== reviewId));
+      if (res.data.deletedCount > 0) {
+        setReviews((prev) => prev.filter((r) => r._id !== reviewId));
+        Swal.fire({
+          icon: "success",
+          title: "Review Deleted!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      }
+    } catch (error) {
       Swal.fire({
-        icon: "success",
-        title: "Review Deleted!",
-        timer: 1500,
-        showConfirmButton: false,
+        icon: "error",
+        title: "Error!",
+        text: error.message,
       });
     }
-  } catch (error) {
-    Swal.fire({
-      icon: "error",
-      title: "Error!",
-      text: error.message,
-    });
+  };
+
+  if (loading) {
+    return (
+      <div> 
+        <Loading></Loading>
+      </div>
+    );
   }
-};
 
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 py-10 px-3 sm:px-6 lg:px-10">
-      <h1 className="text-3xl md:text-4xl font-bold mb-10 text-center text-gray-800 dark:text-gray-100">
-        My Ratings & Reviews
-      </h1>
+      <Helmet> 
+        <title>My Ratings & Reviews - HomeNest</title>
+      </Helmet>
+      <div className="text-center my-8 relative z-10">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
+          My <span className="text-blue-600">Ratings & Reviews</span>
+          {/* Outer border */}
+          <span className="absolute inset-0 border-2 border-blue-600 rounded-lg pointer-events-none -z-0"></span>
+          {/* Inner border */}
+          <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-0"></span>
+        </h2>
+      </div>
 
       {reviews.length === 0 ? (
         <p className="text-center text-gray-600 dark:text-gray-300 text-lg">
@@ -118,10 +145,10 @@ const MyRatings = () => {
                   </div>
 
                   <button
-                    onClick={() =>handleDeleteReview(review._id)}
+                    onClick={() => handleDeleteReview(review._id)}
                     className="bg-red-500 hover:bg-red-600 text-white text-xs sm:text-sm font-semibold px-3 py-1 rounded-md shadow transition-all duration-300 cursor-pointer"
                   >
-                    Delete
+                    Delete Review
                   </button>
                 </div>
 
@@ -133,8 +160,8 @@ const MyRatings = () => {
                     readOnly
                     itemStyles={{
                       itemShapes: Star,
-                      activeFillColor: "#eab308", // deep gold
-                      inactiveFillColor: "#78350f", // dark brownish-gold
+                      activeFillColor: "#eab308",
+                      inactiveFillColor: "#78350f",
                     }}
                   />
                 </div>

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 
 const AddProperty = () => {
   const { user } = useContext(AuthContext);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     propertyName: "",
@@ -20,14 +20,13 @@ const AddProperty = () => {
     address: "",
     imageURL: "",
   });
-  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
   if (!user) {
     return (
-      <div className="text-center ">
-        <Loading></Loading>
+      <div className="text-center my-20">
+        <Loading />
       </div>
     );
   }
@@ -46,14 +45,9 @@ const AddProperty = () => {
       userEmail: user.email,
       postedDate: new Date().toISOString(),
     };
-    // console.log(newProperty);
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/properties",
-        newProperty
-      );
-      console.log("Property added:", res.data);
+      await axios.post("http://localhost:5000/properties", newProperty);
 
       Swal.fire({
         icon: "success",
@@ -91,20 +85,25 @@ const AddProperty = () => {
       className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center relative"
       style={{ backgroundImage: `url(${bgImg})` }}
     >
-      <title> 
-          Add Property - Home Nest 
-      </title>
+      <title>Add Property - HomeNest</title>
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/30"></div>
 
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="relative w-full max-w-3xl bg-white/80 dark:bg-gray-800/80 shadow-lg rounded-lg p-8 space-y-6 z-10"
+        className="relative w-full max-w-3xl bg-white/90 dark:bg-gray-800/90 shadow-lg rounded-lg p-6 sm:p-8 space-y-6 z-10"
       >
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 text-center">
-          Add New Property
+        <div className="text-center my-8 relative z-10">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
+          Add New <span className="text-blue-600">Property</span>
+          {/* Outer border */}
+          <span className="absolute inset-0 border-2 border-blue-600 rounded-lg pointer-events-none -z-0"></span>
+          {/* Inner border */}
+          <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-0"></span>
         </h2>
+      </div>
 
         {/* Property Name */}
         <div>
@@ -133,7 +132,7 @@ const AddProperty = () => {
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows="4"
-            placeholder="Detailed description about the property......"
+            placeholder="Detailed description about the property..."
           />
         </div>
 
@@ -262,9 +261,9 @@ const AddProperty = () => {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-all duration-200 disabled:opacity-50"
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-all duration-200 disabled:opacity-50 w-full sm:w-auto"
           >
-            {loading ? "Adding....." : "Add Property"}
+            {loading ? "Adding..." : "Add Property"}
           </button>
         </div>
       </form>

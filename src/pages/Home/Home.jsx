@@ -5,13 +5,14 @@ import WhyChooseUs from '../WhyChooseUs/WhyChooseUs';
 import HowItWorks from '../HowItWorks/HowItWorks';
 import Testimonials from '../Testimonials/Testimonials';
 import JoinWithUs from '../JoinWithUs/JoinWithUs';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
         <div>
-            <title> 
-                Home - Home Nest
-            </title>
+            <Helmet> 
+                <title>Home Nest - Real Estate Hub</title>
+           </Helmet>
             {/* Banner Slider */}
             <section> 
                  <BannerSlider />

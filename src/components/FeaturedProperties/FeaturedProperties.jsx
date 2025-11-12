@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FeaturedProperty from "./FeaturedProperty";
 import Loading from "./../Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const FeaturedProperties = () => {
   const [properties, setProperties] = useState([]);
@@ -53,10 +54,10 @@ const FeaturedProperties = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
-      <title> 
-          Home - Featured Properties - Home Nest
-      </title>
+    <div className="max-w-6xl mx-auto px-4">
+      <Helmet> 
+        <title>Featured Properties - HomeNest</title>
+      </Helmet>
       {/* Heading */}
       <div className="text-center my-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
@@ -96,7 +97,7 @@ const FeaturedProperties = () => {
       </div>
 
       {/* Properties Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-5 pt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 pt-10">
         {properties.map((property) => (
           <FeaturedProperty key={property._id} property={property} />
         ))}

@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Context-Provider/AuthContext";
 import Loading from "../../components/Loading/Loading";
 import MyProperty from "./MyProperty";
+import { Helmet } from "react-helmet-async";
 
 const MyProperties = () => {
   const { user } = use(AuthContext);
@@ -30,6 +31,9 @@ const MyProperties = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
+      <Helmet> 
+        <title>My Properties - HomeNest</title>
+      </Helmet>
       <div className="text-center my-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
           My <span className="text-blue-600">Properties</span>

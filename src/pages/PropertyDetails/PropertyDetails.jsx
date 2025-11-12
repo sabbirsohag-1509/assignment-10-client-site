@@ -5,6 +5,7 @@ import { MapPin, User, CalendarDays, Star } from "lucide-react";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
+import { Helmet } from "react-helmet-async";
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -38,9 +39,9 @@ const PropertyDetails = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-5 py-10">
-      <title> 
-        {property.propertyName} - Property Details
-      </title>
+      <Helmet> 
+        <title>{property.propertyName} - HomeNest</title>
+     </Helmet>
       {/* Property Card */}
       <div className="bg-base-100 rounded-2xl shadow-xl overflow-hidden border border-base-300">
         {/* Image Section */}

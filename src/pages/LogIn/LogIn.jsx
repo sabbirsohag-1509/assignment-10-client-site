@@ -17,30 +17,67 @@ const LogIn = () => {
   const [loading, setLoading] = useState(false);
 
   //// Email/password login ////
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+ const handleLogin = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  const email = e.target.email.value;
+  const password = e.target.password.value;
 
-    try {
-      const result = await logInInfo(email, password);
-      const user = result.user;
+  try {
+    const result = await logInInfo(email, password);
+    const user = result.user;
 
-      Swal.fire({
-        icon: "success",
-        title: "Login Successful!",
-        text: `Welcome back, ${user.displayName || user.email}`,
-      });
+    Swal.fire({
+      icon: "success",
+      title: "Login Successful!",
+      text: `Welcome back, ${user.displayName || user.email}`,
+    });
 
-      e.target.reset();
-      navigate(location?.state || "/");
-    } catch (error) {
-      console.log("Login error:", error.message);
-      Swal.fire("Error", error.message, "error");
+    e.target.reset();
+    navigate(location?.state || "/");
+  } catch (error) {
+    console.log("Login error:", error.code);
+    let message = "Something went wrong. Please try again!";
+    function getFirebaseAuthErrorMessage(code) {
+      switch (code) {
+        case "auth/invalid-email":
+          return "The email address format is invalid.";
+        case "auth/user-disabled":
+          return "This account has been disabled.";
+        case "auth/user-not-found":
+          return "No account found with that email.";
+        case "auth/wrong-password":
+          return "Incorrect password. Please try again.";
+        case "auth/too-many-requests":
+          return "Too many login attempts. Try again later.";
+        case "auth/network-request-failed":
+          return "Network error. Please check your internet connection.";
+        case "auth/invalid-credential":
+          return "Invalid credentials. Please verify your login details.";
+        case "auth/operation-not-allowed":
+          return "Email/password login is not enabled for this project.";
+        case "auth/missing-password":
+          return "Please enter a password.";
+        case "auth/missing-email":
+          return "Please enter an email address.";
+        case "auth/invalid-login-credentials":
+          return "Email or password is incorrect.";
+        default:
+          return "An unexpected error occurred. Please try again later.";
+      }
     }
+    message = getFirebaseAuthErrorMessage(error.code);
+
+    Swal.fire({
+      icon: "error",
+      title: "Login Failed",
+      text: message,
+    });
+  } finally {
     setLoading(false);
-  };
+  }
+};
+
 
   //// Google login ////
   const handleGoogleLogin = async () => {
@@ -57,7 +94,7 @@ const LogIn = () => {
       navigate(location?.state || "/");
     } catch (error) {
       console.log("Google login error:", error.message);
-      Swal.fire("Error", error.message, "error");
+      Swal.fire("Something Went Wrong", error.message, "error");
     }
   };
 
