@@ -5,7 +5,8 @@ import { Helmet } from "react-helmet-async";
 
 const AllProperties = () => {
     const [properties, setProperties] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+    const [loadingg, setLoadingg] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:5000/properties`)
@@ -15,6 +16,39 @@ const AllProperties = () => {
             setLoading(false);
       });
   }, []);
+
+
+ // Search handler
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const search_text = e.target.search.value;
+    setLoadingg(true);
+    console.log("Searching for:", search_text);
+    fetch(`http://localhost:5000/search?search=${search_text}`)
+      .then((res) => res.json())
+      .then(data => {
+        // console.log(data);
+        setProperties(data);
+        setLoadingg(false);
+      })
+  };
+
+  // Sort handler
+  const handleSortChange = (sortValue) => {
+    // setSortOption(sortValue);
+   fetch(`http://localhost:5000/sort-properties?sort=${sortValue}`)
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data)
+        setProperties(data);
+    })
+  }
+
+
+ 
+
+
     
     if (loading) {
     return (
@@ -38,6 +72,35 @@ const AllProperties = () => {
           <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-10"></span>
         </h2>
       </div>
+      {/* //// */}
+       <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
+        {/* Search */}
+        <div className="relative w-full max-w-md">
+          <form onSubmit={handleSearch}>
+            <input
+              type="search"
+              name="search"
+              placeholder="Search properties..."
+              className="input input-bordered w-60 md:w-64 lg:w-72 ml-8 md:ml-0 pr-10 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 rounded-l-xl border-r-0 rounded-r-none"
+            />
+            <button className="btn absolute top-1/2 -translate-y-1/2 px-2 md:px-5 py-2 bg-blue-600 text-white rounded-xl rounded-l-none hover:bg-blue-700 transition-colors duration-300">
+              {loadingg ? "Searching..." : "Search"}
+            </button>
+          </form>
+        </div>
+
+        {/* Sort */}
+        <select onChange={(e) => handleSortChange(e.target.value)} className="select select-bordered w-60 md:w-64 lg:w-72 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 rounded-xl">
+          <option disabled selected>
+            Sort By
+          </option>
+          <option value="priceLow">Price: Low to High</option>
+          <option value="priceHigh">Price: High to Low</option>
+          <option value="dateNew">Newest Listings</option>
+          <option value="dateOld">Oldest Listings</option>
+        </select>
+      </div>
+      {/* ///// */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:grid-cols-3 lg:gap-5 pt-5">
         {properties.map((property) => (
           <AllProperty key={property._id} property={property}></AllProperty>
