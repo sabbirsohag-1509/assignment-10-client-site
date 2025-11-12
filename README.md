@@ -13,11 +13,11 @@
 * -So main purpose of this project for us is CRUD functionality from mongoDB database and Authentication from Firebase...
 
 
-3. **LIVE LINK**:
+3. **LIVE LINK**: https://whimsical-marigold-942cbe.netlify.app
 
-4. **CLIENT SITE REPO LINK**:
+4. **CLIENT SITE REPO LINK**: https://github.com/sabbirsohag-1509/assignment-10-client-site
 
-5. **SERVER SITE REPO LINK**: 
+5. **SERVER SITE REPO LINK**: https://github.com/sabbirsohag-1509/assignment-10-server-site
 
 
 6. Key Features: 
