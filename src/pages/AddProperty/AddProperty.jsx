@@ -43,6 +43,7 @@ const AddProperty = () => {
       ...formData,
       userName: user.displayName,
       userEmail: user.email,
+      photoUrl: user.photoURL,
       postedDate: new Date().toISOString(),
     };
 
