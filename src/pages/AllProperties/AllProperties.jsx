@@ -9,7 +9,7 @@ const AllProperties = () => {
     const [loadingg, setLoadingg] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/properties`)
+    fetch(`https://home-nest-gamma.vercel.app/properties`)
       .then((res) => res.json())
       .then((data) => {
           setProperties(data);
@@ -25,7 +25,7 @@ const AllProperties = () => {
     const search_text = e.target.search.value;
     setLoadingg(true);
     console.log("Searching for:", search_text);
-    fetch(`http://localhost:5000/search?search=${search_text}`)
+    fetch(`https://home-nest-gamma.vercel.app/search?search=${search_text}`)
       .then((res) => res.json())
       .then(data => {
         // console.log(data);
@@ -37,7 +37,7 @@ const AllProperties = () => {
   // Sort handler
   const handleSortChange = (sortValue) => {
     // setSortOption(sortValue);
-   fetch(`http://localhost:5000/sort-properties?sort=${sortValue}`)
+   fetch(`https://home-nest-gamma.vercel.app/sort-properties?sort=${sortValue}`)
       .then(res => res.json())
       .then(data => {
         // console.log(data)

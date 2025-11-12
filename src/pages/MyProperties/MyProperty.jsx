@@ -24,7 +24,7 @@ const MyProperty = ({ property, setProperties }) => {
     if (confirmDelete.isConfirmed) {
       try {
         const res = await axios.delete(
-          `http://localhost:5000/properties/${property._id}`
+          `https://home-nest-gamma.vercel.app/properties/${property._id}`
         );
 
         if (res.data.deletedCount > 0) {

@@ -16,7 +16,7 @@ const MyRatings = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`http://localhost:5000/review/${user.email}`)
+    fetch(`https://home-nest-gamma.vercel.app/review/${user.email}`)
       .then((res) => res.json())
       .then(data => {
         setReviews(data);
@@ -44,7 +44,7 @@ const MyRatings = () => {
 
     try {
       const res = await axios.delete(
-        `http://localhost:5000/review/${reviewId}`
+        `https://home-nest-gamma.vercel.app/review/${reviewId}`
       );
 
       if (res.data.deletedCount > 0) {

@@ -11,7 +11,7 @@ const MyProperties = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/my-properties?email=${user.email}`)
+      fetch(`https://home-nest-gamma.vercel.app/my-properties?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           //   console.log(data);

@@ -14,7 +14,7 @@ const PropertyDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/propertyDetails/${id}`)
+    fetch(`https://home-nest-gamma.vercel.app/propertyDetails/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProperty(data);
