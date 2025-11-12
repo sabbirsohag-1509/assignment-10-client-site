@@ -6,7 +6,7 @@ const FeaturedProperties = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingg, setLoadingg] = useState(false);
-  const [sortOption, setSortOption] = useState("")
+  // const [sortOption, setSortOption] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:5000/latest-properties`)
@@ -34,12 +34,12 @@ const FeaturedProperties = () => {
 
   // Sort handler
   const handleSortChange = (sortValue) => {
-    setSortOption(sortValue);
-    fetch(`http://localhost:5000/sort-properties?sort=${sortValue}`)
+    // setSortOption(sortValue);
+   fetch(`http://localhost:5000/sort-properties?sort=${sortValue}&limit=6`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-        setProperties(data)
+        // console.log(data)
+        setProperties(data);
     })
   }
  
@@ -54,6 +54,9 @@ const FeaturedProperties = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4">
+      <title> 
+          Home - Featured Properties - Home Nest
+      </title>
       {/* Heading */}
       <div className="text-center my-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
@@ -72,7 +75,7 @@ const FeaturedProperties = () => {
               type="search"
               name="search"
               placeholder="Search properties..."
-              className="input input-bordered w-60 md:w-64 lg:w-72 ml-8 md:ml-0 pr-10 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 rounded-l-xl"
+              className="input input-bordered w-60 md:w-64 lg:w-72 ml-8 md:ml-0 pr-10 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 rounded-l-xl border-r-0 rounded-r-none"
             />
             <button className="btn absolute top-1/2 -translate-y-1/2 px-2 md:px-5 py-2 bg-blue-600 text-white rounded-xl rounded-l-none hover:bg-blue-700 transition-colors duration-300">
               {loadingg ? "Searching..." : "Search"}

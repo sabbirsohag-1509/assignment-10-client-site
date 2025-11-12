@@ -60,7 +60,7 @@ const UpdateProperties = () => {
         timer: 1500,
         showConfirmButton: false,
       });
-      navigate("/my-properties");
+      navigate(`/propertyDetails/${id}`);
     } catch (error) {
       Swal.fire({
         icon: "error",

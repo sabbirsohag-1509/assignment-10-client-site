@@ -37,6 +37,9 @@ const PropertyDetails = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-5 py-10">
+      <title> 
+        {property.propertyName} - Property Details
+      </title>
       {/* Property Card */}
       <div className="bg-base-100 rounded-2xl shadow-xl overflow-hidden border border-base-300">
         {/* Image Section */}
@@ -101,7 +104,7 @@ const PropertyDetails = () => {
       {/* Ratings & Reviews Section */}
       <div className="mt-10 bg-base-200 p-6 rounded-2xl shadow-md border border-base-300">
         <h3 className="text-2xl font-bold mb-4 text-base-content">
-          ⭐ Ratings & Reviews
+          Rating & Reviews.........
         </h3>
 
         {property?.ratings && property.ratings.length > 0 ? (

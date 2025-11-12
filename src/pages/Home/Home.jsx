@@ -9,6 +9,9 @@ import JoinWithUs from '../JoinWithUs/JoinWithUs';
 const Home = () => {
     return (
         <div>
+            <title> 
+                Home - Home Nest
+            </title>
             {/* Banner Slider */}
             <section> 
                  <BannerSlider />

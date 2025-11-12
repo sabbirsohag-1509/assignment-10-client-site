@@ -25,6 +25,9 @@ const AllProperties = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4">
+      <title> 
+          All Properties - Home Nest
+      </title>
       <div className="text-center my-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
           Feature All <span className="text-blue-600">Properties</span>

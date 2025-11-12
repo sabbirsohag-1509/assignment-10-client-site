@@ -209,7 +209,7 @@ const Navbar = () => {
         ) : (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
+              <div className=" w-8 md:w-10 rounded-full">
                 <img
                   src={user.photoURL || "https://i.pravatar.cc/300"}
                   alt={user.displayName || "User"}

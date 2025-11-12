@@ -49,6 +49,9 @@ const MyProperty = ({ property, setProperties }) => {
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-md transform transition-transform duration-300 hover:scale-105">
+      <title> 
+        {propertyName} - My Property
+      </title>
       
       {/* Image */}
       <div className="relative">
@@ -84,7 +87,7 @@ const MyProperty = ({ property, setProperties }) => {
         <div className="flex flex-col sm:flex-row justify-between items-center pt-5 gap-3">
           <Link
             to={`/propertyDetails/${property._id}`}
-            className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-medium sm:w-36 justify-center"
+            className="flex items-center w-full gap-1 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-medium sm:w-36 justify-center"
           >
             <Info size={18} /> Details
           </Link>

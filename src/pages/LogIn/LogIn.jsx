@@ -181,7 +181,7 @@ const LogIn = () => {
         <div className="mt-4 text-center">
           <p className="text-sm text-base-content/80">
             Don’t have an account?{" "}
-            <Link to="/register" className="text-primary font-semibold">
+            <Link to="/register" className="text-blue-600 font-bold underline">
               Register
             </Link>{" "}
             here
