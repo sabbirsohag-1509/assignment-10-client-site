@@ -1,11 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  FaHome,
-  FaBuilding,
-  FaPlus,
-  FaClipboardList,
-  FaStar,
-} from "react-icons/fa";
+import { Home, Building, Plus, Star, Building2 } from "lucide-react";
 import { Link, NavLink } from "react-router";
 import logoImg from "../../assets/logo.png";
 import { AuthContext } from "../../pages/Context-Provider/AuthContext";
@@ -20,7 +14,6 @@ const Navbar = () => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // LogOut handler
   const handleLogout = () => {
     logOutInfo()
       .then(() => {
@@ -41,9 +34,7 @@ const Navbar = () => {
       });
   };
 
-  // Theme handler
   const handleTheme = (checked) => {
-    // console.log(checked);
     setTheme(checked ? "dark" : "light");
   };
 
@@ -52,19 +43,30 @@ const Navbar = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          `flex items-center mx-2 ${isActive ? "font-bold text-blue-600" : ""}`
+          `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ease-out
+           ${
+             isActive
+               ? "text-blue-600 font-medium"
+               : "text-base-content/70 hover:text-blue-500"
+           }`
         }
       >
-        <FaHome className="mr-1" /> Home
+        <Home className="w-4 h-4" />
+        Home
       </NavLink>
 
       <NavLink
         to="/all-properties"
         className={({ isActive }) =>
-          `flex items-center mx-2 ${isActive ? "font-bold text-blue-600" : ""}`
+          `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
+            isActive
+              ? "text-blue-600 font-medium"
+              : "text-base-content/70 hover:text-blue-500"
+          }`
         }
       >
-        <FaBuilding className="mr-1" /> All Properties
+        <Building className="w-4 h-4" />
+        All Properties
       </NavLink>
 
       {user && (
@@ -72,34 +74,43 @@ const Navbar = () => {
           <NavLink
             to="/add-property"
             className={({ isActive }) =>
-              `flex items-center mx-2 ${
-                isActive ? "font-bold text-blue-600" : ""
+              `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
+                isActive
+                  ? "text-blue-600 font-medium"
+                  : "text-base-content/70 hover:text-blue-500"
               }`
             }
           >
-            <FaPlus className="mr-1" /> Add Property
+            <Plus className="w-4 h-4" />
+            Add Property
           </NavLink>
 
           <NavLink
             to="/my-properties"
             className={({ isActive }) =>
-              `flex items-center mx-2 ${
-                isActive ? "font-bold text-blue-600" : ""
+              `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
+                isActive
+                  ? "text-blue-600 font-medium"
+                  : "text-base-content/70 hover:text-blue-500"
               }`
             }
           >
-            <FaClipboardList className="mr-1" /> My Properties
+            <Building2 className="w-4 h-4" />
+            My Properties
           </NavLink>
 
           <NavLink
             to="/my-ratings"
             className={({ isActive }) =>
-              `flex items-center mx-2 ${
-                isActive ? "font-bold text-blue-600" : ""
+              `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
+                isActive
+                  ? "text-blue-600 font-medium"
+                  : "text-base-content/70 hover:text-blue-500"
               }`
             }
           >
-            <FaStar className="mr-1" /> My Ratings
+            <Star className="w-4 h-4" />
+            My Ratings
           </NavLink>
         </>
       )}
@@ -107,11 +118,11 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm px-4">
+    <div className="navbar bg-base-100 shadow-sm h-16 px-4 md:px-8 lg:px-12 sticky top-0 z-50 border-b border-gray-200">
       {/* Navbar Start */}
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} className="lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -123,7 +134,7 @@ const Navbar = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
+                d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
           </div>
@@ -136,7 +147,7 @@ const Navbar = () => {
         </div>
         <Link to="/" className="flex items-center">
           <img src={logoImg} alt="Logo" className="w-12 md:w-14" />
-          <span className="  font-bold text-xl md:text-2xl">
+          <span className="font-bold text-xl md:text-2xl">
             Home<span className="text-blue-600">Nest</span>
           </span>
         </Link>
@@ -148,68 +159,68 @@ const Navbar = () => {
       </div>
 
       {/* Navbar End */}
-      <div className="navbar-end">
-        <div>
-          {/* Light & Dark Mode Toggle */}
-
-          <label
-            onChange={(e) => handleTheme(e.target.checked)}
-            className="flex cursor-pointer gap-2 items-center mr-5"
-          >
+      <div className="navbar-end flex items-center gap-2 lg:gap-4">
+        {/* Theme Toggle */}
+        <div className="flex items-center gap-1">
+          <label className="flex items-center gap-1 cursor-pointer">
+            {/* Sun Icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
+              width="20"
+              height="20"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              viewBox="0 0 24 24"
             >
               <circle cx="12" cy="12" r="5" />
               <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
             </svg>
             <input
               type="checkbox"
-              value="synthwave"
               checked={theme === "dark"}
-              className="toggle toggle-sm scale-90 theme-controller"
+              onChange={(e) => handleTheme(e.target.checked)}
+              className="toggle toggle-sm"
             />
+            {/* Moon Icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
+              width="20"
+              height="20"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              viewBox="0 0 24 24"
             >
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
           </label>
         </div>
+
+        {/* Auth Buttons */}
         {!user ? (
-          <>
+          <div className="flex flex-col lg:flex-row gap-1">
             <NavLink
               to="/register"
-              className="mx-2 btn btn-outline btn-sm bg-blue-600 text-white hover:bg-blue-700"
+              className="btn btn-outline btn-sm bg-blue-600 text-white hover:bg-blue-700 w-full lg:w-auto"
             >
               Sign Up
             </NavLink>
             <NavLink
               to="/login"
-              className="mx-2 btn btn-outline btn-sm bg-blue-600 text-white hover:bg-blue-700"
+              className="btn btn-outline btn-sm bg-blue-600 text-white hover:bg-blue-700 w-full lg:w-auto"
             >
-              LogIn
+              Log In
             </NavLink>
-          </>
+          </div>
         ) : (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className=" w-8 md:w-10 rounded-full">
+              <div className="w-8 md:w-10 rounded-full">
                 <img
                   src={user.photoURL || "https://i.pravatar.cc/300"}
                   alt={user.displayName || "User"}
@@ -221,19 +232,29 @@ const Navbar = () => {
               className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <span className="font-semibold hover:bg-blue-600 hover:text-white">
+                <span className="font-semibold hover:bg-blue-400 hover:text-white">
                   {user.displayName}
                 </span>
               </li>
               <li>
-                <span className="text-sm text-gray-600 hover:bg-blue-600 hover:text-white">
+                <span className="text-sm text-gray-600 hover:bg-blue-400 hover:text-white">
                   {user.email}
                 </span>
               </li>
               <li>
+                  <NavLink to='/profile'> 
+                    <button className="font-medium"> 
+                      Profile
+                    </button>
+                </NavLink>
+                  <NavLink to='/settings'> 
+                    <button className="font-medium"> 
+                      Dashboard
+                    </button>
+                </NavLink>
                 <button
                   onClick={handleLogout}
-                  className="btn btn-outline btn-sm w-full mt-2 hover:bg-blue-600 hover:text-white"
+                  className="btn btn-sm w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   Log Out
                 </button>

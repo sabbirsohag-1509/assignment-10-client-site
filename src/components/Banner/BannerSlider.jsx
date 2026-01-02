@@ -22,7 +22,7 @@ const BannerSlider = () => {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto mt-4 md:mt-6 rounded-2xl overflow-hidden shadow-2xl border border-gray-200/30">
+    <div className="w-full h-[65vh] md:h-[70vh] lg:h-[75vh] max-w-7xl mx-auto mt-4 md:mt-6 rounded-2xl overflow-hidden shadow-2xl border border-gray-200/30">
       <Slider {...settings}>
         {/* Slide 1 */}
         <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
