@@ -16,13 +16,13 @@ const BannerSlider = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
-    arrows: false,
     pauseOnHover: false,
     fade: true,
+    arrows: true,
   };
 
   return (
-    <div className="w-full h-[65vh] md:h-[70vh] lg:h-[75vh] max-w-7xl mx-auto mt-4 md:mt-6 rounded-2xl overflow-hidden shadow-2xl border border-gray-200/30">
+    <div className="w-full h-[65vh] md:h-[70vh] lg:h-[75vh] max-w-7xl mx-auto mt-4 md:mt-6 rounded-2xl overflow-hidden shadow-2xl border border-gray-200/30 relative">
       <Slider {...settings}>
         {/* Slide 1 */}
         <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
@@ -31,7 +31,7 @@ const BannerSlider = () => {
             alt="Peaceful Living"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/30 to-transparent flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-8 lg:px-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-transparent flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-8 lg:px-10">
             <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white drop-shadow-lg">
               Your Peaceful Living Awaits
             </h2>
@@ -44,6 +44,23 @@ const BannerSlider = () => {
               Explore Homes
             </button>
           </div>
+
+          {/* Scroll-down arrow */}
+          <div className="absolute bottom-4 pt-3 w-full flex justify-center">
+            <svg
+              className="w-6 h-6 text-white animate-bounce"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </div>
         </div>
 
         {/* Slide 2 */}
@@ -53,7 +70,7 @@ const BannerSlider = () => {
             alt="Smart City Homes"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex flex-col justify-center items-start px-4 sm:px-6 md:px-14 lg:px-20">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex flex-col justify-center items-start px-4 sm:px-6 md:px-14 lg:px-20">
             <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white drop-shadow-xl">
               Smart Homes for Smart Living
             </h2>
@@ -64,6 +81,23 @@ const BannerSlider = () => {
             <button className="mt-3 sm:mt-4 md:mt-5 px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-blue-600 text-white text-xs sm:text-sm md:text-base font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg">
               Discover Smart Homes
             </button>
+
+            {/* Scroll-down arrow */}
+            <div className="absolute bottom-4 w-full flex justify-center">
+              <svg
+                className="w-6 h-6 text-white animate-bounce"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -89,8 +123,29 @@ const BannerSlider = () => {
           </div>
         </div>
       </Slider>
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-50">
+        <svg
+          className="w-8 h-8 text-white animate-bounce"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </div>
     </div>
   );
 };
 
 export default BannerSlider;
+
+
+
+
+
+
