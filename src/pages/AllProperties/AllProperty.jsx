@@ -76,7 +76,7 @@ const AllProperty = ({ property }) => {
                        text-white text-sm font-medium
                        rounded-lg shadow-md
                        transition-all duration-300
-                       w-full hover:scale-[1.02] active:scale-95"
+                       w-full hover:scale-[1.02] active:scale-95 cursor-pointer"
           >
             <Info size={16} />
             View Details
