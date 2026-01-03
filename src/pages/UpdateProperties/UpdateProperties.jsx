@@ -16,7 +16,7 @@ const UpdateProperties = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://home-nest-gamma.vercel.app/propertyDetails/${id}`)
+    fetch(`http://localhost:5000/propertyDetails/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProperty(data);
@@ -51,7 +51,7 @@ const UpdateProperties = () => {
     // console.log(updatedProperty);
     try {
       await axios.patch(
-        `https://home-nest-gamma.vercel.app/properties/${id}`,
+        `http://localhost:5000/properties/${id}`,
         updatedProperty
       );
       //   console.log("Property updated:", res.data);

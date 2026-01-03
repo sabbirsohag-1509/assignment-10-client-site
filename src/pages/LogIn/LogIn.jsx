@@ -34,7 +34,7 @@ const LogIn = () => {
     });
 
     e.target.reset();
-    navigate(location?.state || "/");
+   navigate(location.state?.from?.pathname || "/", { replace: true });
   } catch (error) {
     console.log("Login error:", error.code);
     let message = "Something went wrong. Please try again!";
@@ -91,7 +91,7 @@ const LogIn = () => {
         text: `Welcome, ${user.displayName || user.email}`,
       });
 
-      navigate(location?.state || "/");
+     navigate(location.state?.from?.pathname || "/", { replace: true });
     } catch (error) {
       console.log("Google login error:", error.message);
       Swal.fire("Something Went Wrong", error.message, "error");

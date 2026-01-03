@@ -18,7 +18,8 @@ const AddProperty = () => {
     city: "",
     area: "",
     address: "",
-    imageURL: "",
+    imageURL: "",      // Main image
+    images: ["", "", ""], // Extra 3 images for details carousel
   });
 
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,17 @@ const AddProperty = () => {
   }
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Check if it's one of the extra images
+    if (name.startsWith("image_")) {
+      const index = parseInt(name.split("_")[1]); // image_0, image_1, image_2
+      const updatedImages = [...formData.images];
+      updatedImages[index] = value;
+      setFormData({ ...formData, images: updatedImages });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -48,7 +59,7 @@ const AddProperty = () => {
     };
 
     try {
-      await axios.post("https://home-nest-gamma.vercel.app/properties", newProperty);
+      await axios.post("http://localhost:5000/properties", newProperty);
 
       Swal.fire({
         icon: "success",
@@ -57,8 +68,10 @@ const AddProperty = () => {
         timer: 1500,
         showConfirmButton: false,
       });
+
       navigate("/my-properties");
 
+      // Reset form
       setFormData({
         propertyName: "",
         description: "",
@@ -68,6 +81,7 @@ const AddProperty = () => {
         area: "",
         address: "",
         imageURL: "",
+        images: ["", "", ""],
       });
     } catch (error) {
       Swal.fire({
@@ -83,9 +97,9 @@ const AddProperty = () => {
 
   if (loading) {
     return (
-      <div> 
-        <Loading></Loading>
-      </div> 
+      <div>
+        <Loading />
+      </div>
     );
   }
 
@@ -104,15 +118,13 @@ const AddProperty = () => {
         onSubmit={handleSubmit}
         className="relative w-full max-w-3xl bg-white/90 dark:bg-gray-800/90 shadow-lg rounded-lg p-6 sm:p-8 space-y-6 z-10"
       >
-        <div className="text-center my-8 relative z-10">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
-          Add New <span className="text-blue-600">Property</span>
-          {/* Outer border */}
-          <span className="absolute inset-0 border-2 border-blue-600 rounded-lg pointer-events-none -z-0"></span>
-          {/* Inner border */}
-          <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-0"></span>
-        </h2>
-      </div>
+        <div className="text-center">
+          <h2 className="text-xl md:text-2xl font-bold mb-2 relative inline-block px-6 py-1">
+            Add New <span className="text-blue-600">Properties</span>
+            <span className="absolute inset-0 border border-blue-600 rounded-lg pointer-events-none -z-10"></span>
+            <span className="absolute inset-[4px] border border-blue-300 rounded-lg pointer-events-none -z-10"></span>
+          </h2>
+        </div>
 
         {/* Property Name */}
         <div>
@@ -224,7 +236,7 @@ const AddProperty = () => {
           </div>
         </div>
 
-        {/* Image URL */}
+        {/* Main Image URL */}
         <div>
           <label className="block text-gray-700 dark:text-gray-200 mb-1">
             Image URL
@@ -235,8 +247,26 @@ const AddProperty = () => {
             value={formData.imageURL}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Your Property Image URL"
+            placeholder="Main property image URL"
           />
+        </div>
+
+        {/* Extra Images */}
+        <div>
+          <label className="block text-gray-700 dark:text-gray-200 mb-1">
+            Images (details carousel)
+          </label>
+          {formData.images.map((img, idx) => (
+            <input
+              key={idx}
+              type="text"
+              name={`image_${idx}`}
+              value={img}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-md mb-2 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder={`Image URL ${idx + 1}`}
+            />
+          ))}
         </div>
 
         {/* User Info */}

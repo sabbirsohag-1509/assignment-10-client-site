@@ -4,16 +4,29 @@ import "@smastrom/react-rating/style.css";
 import axios from "axios";
 import { AuthContext } from "../../pages/Context-Provider/AuthContext";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 const ReviewForm = ({ property }) => {
   const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
-    const [reviewText, setReviewText] = useState("");
-    const navigate = useNavigate(); 
+  const [reviewText, setReviewText] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      // User not logged in → redirect to login with state
+      Swal.fire({
+        icon: "warning",
+        title: "Login Required",
+        text: "You need to login to submit a review!",
+        confirmButtonText: "Login",
+      }).then(() => {
+        navigate("/login", { state: { from: location } });
+      });
+      return;
+    }
 
     const reviewData = {
       propertyName: property.propertyName,
@@ -28,7 +41,7 @@ const ReviewForm = ({ property }) => {
     };
     console.log("Submitting review:", reviewData);
     try {
-      const res = await axios.post("https://home-nest-gamma.vercel.app/review", reviewData);
+      const res = await axios.post("http://localhost:5000/review", reviewData);
       console.log("Review submitted:", res.data);
       Swal.fire({
         position: "top-center",
@@ -37,10 +50,13 @@ const ReviewForm = ({ property }) => {
         showConfirmButton: false,
         timer: 1500,
       });
-        navigate("/my-ratings");
       // Reset form
       setRating(0);
       setReviewText("");
+
+       setTimeout(() => {
+      window.location.reload();
+    }, 500); 
     } catch (error) {
       console.error(
         "Error submitting review:",

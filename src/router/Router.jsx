@@ -11,6 +11,9 @@ import PrivateRoute from "../pages/Context-Provider/PrivateRoute";
 import MyProperties from "../pages/MyProperties/MyProperties";
 import UpdateProperties from "../pages/UpdateProperties/UpdateProperties";
 import MyRatings from "../pages/MyRatings/MyRatings";
+import AboutUs from "../components/Footer/AboutUs/AboutUs";
+import TermsCondition from "../components/Footer/TermsCondition/TermsCondition";
+import PrivacyPolicy from "../components/Footer/PrivacyPolicy/PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +42,7 @@ const router = createBrowserRouter([
       },
       { 
         path: "propertyDetails/:id",
-        element: <PrivateRoute><PropertyDetails></PropertyDetails></PrivateRoute>
+        element: <PropertyDetails></PropertyDetails>
       },
       {
         path: "/my-properties",
@@ -52,6 +55,18 @@ const router = createBrowserRouter([
       {
         path: "/my-ratings",
         element: <PrivateRoute><MyRatings></MyRatings></PrivateRoute>
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs></AboutUs>
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <TermsCondition></TermsCondition>
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy></PrivacyPolicy>
       }
     ],
   },

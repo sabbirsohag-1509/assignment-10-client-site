@@ -25,7 +25,7 @@ const FeaturedProperties = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4">
       <Helmet>
         <title>Featured Properties - HomeNest</title>
       </Helmet>

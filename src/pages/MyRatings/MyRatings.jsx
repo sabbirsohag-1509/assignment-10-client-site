@@ -16,7 +16,7 @@ const MyRatings = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`https://home-nest-gamma.vercel.app/review/${user.email}`)
+    fetch(`http://localhost:5000/review/${user.email}`)
       .then((res) => res.json())
       .then(data => {
         setReviews(data);
@@ -44,7 +44,7 @@ const MyRatings = () => {
 
     try {
       const res = await axios.delete(
-        `https://home-nest-gamma.vercel.app/review/${reviewId}`
+        `http://localhost:5000/review/${reviewId}`
       );
 
       if (res.data.deletedCount > 0) {
@@ -80,12 +80,12 @@ const MyRatings = () => {
         <title>My Ratings & Reviews - HomeNest</title>
       </Helmet>
       <div className="text-center my-8 relative z-10">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
+        <h2 className="text-xl md:text-2xl font-bold mb-4 relative inline-block px-6 py-2">
           My <span className="text-blue-600">Ratings & Reviews</span>
           {/* Outer border */}
-          <span className="absolute inset-0 border-2 border-blue-600 rounded-lg pointer-events-none -z-0"></span>
+          <span className="absolute inset-0 border-1 border-blue-600 rounded-lg pointer-events-none -z-0"></span>
           {/* Inner border */}
-          <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-0"></span>
+          <span className="absolute inset-[4px] border-1 border-blue-300 rounded-lg pointer-events-none -z-0"></span>
         </h2>
       </div>
 
@@ -98,7 +98,7 @@ const MyRatings = () => {
           {reviews.map((review) => (
             <div
               key={review._id}
-              className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col"
+              className="bg-white dark:bg-gray-800 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col"
             >
               {/* Property Image */}
               <div className="relative">
@@ -109,7 +109,7 @@ const MyRatings = () => {
                 />
 
                 {/* Property Name (modern badge design) */}
-                <div className="absolute top-3 left-3 bg-gradient-to-r from-blue-600 to-indigo-500 text-white text-sm font-medium px-3 py-1 rounded-full shadow-md">
+                <div className="absolute top-3 left-3 bg-gradient-to-r from-blue-600 to-indigo-400 text-white text-sm font-medium px-3 py-1 rounded-full shadow-md">
                   {review.propertyName}
                 </div>
               </div>

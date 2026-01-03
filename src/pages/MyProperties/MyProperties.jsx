@@ -11,7 +11,7 @@ const MyProperties = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://home-nest-gamma.vercel.app/my-properties?email=${user.email}`)
+      fetch(`http://localhost:5000/my-properties?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           //   console.log(data);
@@ -30,17 +30,17 @@ const MyProperties = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <Helmet> 
         <title>My Properties - HomeNest</title>
       </Helmet>
       <div className="text-center my-8">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
+        <h2 className=" text-xl md:text-2xl font-bold mb-2 relative inline-block px-6 py-1">
           My <span className="text-blue-600">Properties</span>
           {/* Outer border */}
-          <span className="absolute inset-0 border-2 border-blue-600 rounded-lg pointer-events-none -z-10"></span>
+          <span className="absolute inset-0 border border-blue-600 rounded-lg pointer-events-none -z-10"></span>
           {/* Inner border */}
-          <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-10"></span>
+          <span className="absolute inset-[4px] border border-blue-300 rounded-lg pointer-events-none -z-10"></span>
         </h2>
       </div>
                   {/* //////////// */}

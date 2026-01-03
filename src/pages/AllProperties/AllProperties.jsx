@@ -76,7 +76,7 @@ const AllProperties = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4">
       <Helmet>
         <title>All Properties - HomeNest</title>
       </Helmet>
@@ -113,7 +113,9 @@ const AllProperties = () => {
 
         {/* Category Filter */}
         <select
+          value={category}
           onChange={(e) => {
+            
             setCategory(e.target.value);
             setCurrentPage(1);
           }}
@@ -128,6 +130,7 @@ const AllProperties = () => {
 
         {/* City Filter */}
         <select
+          value={city}
           onChange={(e) => {
             setCity(e.target.value);
             setCurrentPage(1);
@@ -136,8 +139,9 @@ const AllProperties = () => {
         >
           <option value="">All Cities</option>
           <option value="Dhaka">Dhaka</option>
-          <option value="Chattogram">Chattogram</option>
           <option value="Rangpur">Rangpur</option>
+          <option value="Dinajpur">Dinajpur</option>
+          <option value="Chattogram">Chattogram</option>
         </select>
 
         {/* Sort */}

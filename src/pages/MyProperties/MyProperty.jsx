@@ -24,7 +24,7 @@ const MyProperty = ({ property, setProperties }) => {
     if (confirmDelete.isConfirmed) {
       try {
         const res = await axios.delete(
-          `https://home-nest-gamma.vercel.app/properties/${property._id}`
+          `http://localhost:5000/properties/${property._id}`
         );
 
         if (res.data.deletedCount > 0) {
@@ -51,7 +51,10 @@ const MyProperty = ({ property, setProperties }) => {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-md transform transition-transform duration-300 hover:scale-105">
+    <div className="bg-white dark:bg-gray-600 rounded-xl overflow-hidden
+                 shadow-sm hover:shadow-xl
+                 transition-all duration-300
+                 transform hover:-translate-y-1">
       <title>{propertyName} - My Property</title>
 
       {/* Image */}
@@ -59,7 +62,8 @@ const MyProperty = ({ property, setProperties }) => {
         <img
           src={imageURL}
           alt={propertyName}
-          className="w-full h-56 object-cover"
+          className="w-full h-56 object-cover transform hover:scale-105
+                     transition-transform duration-500"
         />
       </div>
 
@@ -81,7 +85,7 @@ const MyProperty = ({ property, setProperties }) => {
         </div>
 
         <p className="flex items-center gap-1 text-gray-800 dark:text-white font-semibold">
-          <TbCurrencyTaka className="text-xl" /> {price}/=
+          <TbCurrencyTaka className="text-xl" /> {price} Tk
         </p>
 
         <p className="text-xs text-gray-500 dark:text-white">
@@ -110,7 +114,7 @@ const MyProperty = ({ property, setProperties }) => {
 
           <button
             onClick={deleteBtnHandler}
-            className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg text-sm font-medium w-full sm:w-36 justify-center"
+            className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg text-sm font-medium w-full sm:w-36 justify-center cursor-pointer"
           >
             <Trash2 size={16} /> Delete
           </button>
