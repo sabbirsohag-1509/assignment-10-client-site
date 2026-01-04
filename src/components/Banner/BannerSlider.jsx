@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import banner1 from "../../assets/banner1.jpg";
 import banner2 from "../../assets/banner2.jpg";
 import banner3 from "../../assets/banner3.jpg";
+import { Link } from "react-router";
 
 const BannerSlider = () => {
   const settings = {
@@ -31,7 +32,7 @@ const BannerSlider = () => {
             alt="Peaceful Living"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-transparent flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-8 lg:px-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/60 to-transparent flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-8 lg:px-10">
             <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white drop-shadow-lg">
               Your Peaceful Living Awaits
             </h2>
@@ -40,9 +41,9 @@ const BannerSlider = () => {
               neighborhood with{" "}
               <span className="text-blue-300 font-semibold">Home Nest</span>.
             </p>
-            <button className="mt-3 sm:mt-4 md:mt-5 px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-blue-600 text-white text-xs sm:text-sm md:text-base font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg">
+            <Link to="/all-properties" className="mt-3 sm:mt-4 md:mt-5 px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-blue-600 text-white text-xs sm:text-sm md:text-base font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg">
               Explore Homes
-            </button>
+            </Link>
           </div>
 
           {/* Scroll-down arrow */}
@@ -70,7 +71,7 @@ const BannerSlider = () => {
             alt="Smart City Homes"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex flex-col justify-center items-start px-4 sm:px-6 md:px-14 lg:px-20">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex flex-col justify-center items-start px-4 sm:px-6 md:px-14 lg:px-20">
             <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white drop-shadow-xl">
               Smart Homes for Smart Living
             </h2>
@@ -78,9 +79,9 @@ const BannerSlider = () => {
               Live in comfort and control — energy-efficient homes equipped with
               cutting-edge smart technology, built for your lifestyle.
             </p>
-            <button className="mt-3 sm:mt-4 md:mt-5 px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-blue-600 text-white text-xs sm:text-sm md:text-base font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg">
+            <Link to="/all-properties" className="mt-3 sm:mt-4 md:mt-5 px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-blue-600 text-white text-xs sm:text-sm md:text-base font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg">
               Discover Smart Homes
-            </button>
+            </Link>
 
             {/* Scroll-down arrow */}
             <div className="absolute bottom-4 w-full flex justify-center">
@@ -108,7 +109,7 @@ const BannerSlider = () => {
             alt="Investment Opportunities"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-10">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-10">
             <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white drop-shadow-lg">
               Invest in Your Future, Today
             </h2>
@@ -117,9 +118,9 @@ const BannerSlider = () => {
               <span className="text-blue-300 font-semibold">Home Nest</span> makes
               real estate investing effortless, secure, and rewarding.
             </p>
-            <button className="mt-3 sm:mt-4 md:mt-5 px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-blue-600 text-white text-xs sm:text-sm md:text-base font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg">
+            <Link to="/all-properties" className="mt-3 sm:mt-4 md:mt-5 px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-blue-600 text-white text-xs sm:text-sm md:text-base font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg">
               Start Investing
-            </button>
+            </Link>
           </div>
         </div>
       </Slider>

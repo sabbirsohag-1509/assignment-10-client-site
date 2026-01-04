@@ -6,6 +6,10 @@ import HowItWorks from '../HowItWorks/HowItWorks';
 import Testimonials from '../Testimonials/Testimonials';
 import JoinWithUs from '../JoinWithUs/JoinWithUs';
 import { Helmet } from 'react-helmet-async';
+import PropertyCategories from './PropertyCategories/PropertyCategories';
+import Statistics from './Statistics/Statistics';
+import LatestBlogs from './LatestBlogs/LatestBlogs';
+import NewsLetter from './NewsLetter/NewsLetter';
 
 const Home = () => {
     return (
@@ -37,6 +41,22 @@ const Home = () => {
             {/* Join With Us Section */}
             <section> 
                 <JoinWithUs></JoinWithUs>
+            </section>
+            {/* Property Categories Section */}
+            <section> 
+                <PropertyCategories></PropertyCategories>
+            </section>
+            {/* Statistics Section */}
+            <section> 
+                <Statistics></Statistics>
+            </section>
+            {/* Latest Blogs Section */}
+            <section> 
+                <LatestBlogs></LatestBlogs>
+            </section>
+            {/* Newsletter Section */}
+            <section> 
+                <NewsLetter></NewsLetter>
             </section>
         </div>
     );

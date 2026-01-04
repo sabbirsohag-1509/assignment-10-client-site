@@ -65,7 +65,7 @@ const AllProperty = ({ property }) => {
         {/* Price */}
         <p className="text-lg font-bold text-blue-600 dark:text-white flex items-center">
           <TbCurrencyTaka size={20} />
-          {price.toLocaleString()} Tk
+          {Number(price).toLocaleString()} Tk
         </p>
 
         {/* CTA */}

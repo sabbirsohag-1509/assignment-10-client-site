@@ -166,8 +166,8 @@ const Navbar = () => {
             {/* Sun Icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="16"
+              height="16"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -182,13 +182,13 @@ const Navbar = () => {
               type="checkbox"
               checked={theme === "dark"}
               onChange={(e) => handleTheme(e.target.checked)}
-              className="toggle toggle-sm"
+              className="toggle toggle-xs"
             />
             {/* Moon Icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="16"
+              height="16"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -203,7 +203,7 @@ const Navbar = () => {
 
         {/* Auth Buttons */}
         {!user ? (
-          <div className="flex flex-col lg:flex-row gap-1">
+          <div className="flex flex-col lg:flex-row gap-0 lg:gap-1">
             <NavLink
               to="/register"
               className="btn btn-outline btn-sm bg-blue-600 text-white hover:bg-blue-700 w-full lg:w-auto"

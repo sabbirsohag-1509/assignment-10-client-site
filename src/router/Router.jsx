@@ -14,6 +14,8 @@ import MyRatings from "../pages/MyRatings/MyRatings";
 import AboutUs from "../components/Footer/AboutUs/AboutUs";
 import TermsCondition from "../components/Footer/TermsCondition/TermsCondition";
 import PrivacyPolicy from "../components/Footer/PrivacyPolicy/PrivacyPolicy";
+import BlogDetails from "../pages/Home/LatestBlogs/BlogDetails";
+import AllBlogs from "../pages/Home/LatestBlogs/Blogs/Blogs";
 
 const router = createBrowserRouter([
   {
@@ -67,7 +69,15 @@ const router = createBrowserRouter([
       {
         path: "/privacy-policy",
         element: <PrivacyPolicy></PrivacyPolicy>
-      }
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails></BlogDetails>
+      },
+      {
+        path: "/blogs",
+        element:<AllBlogs></AllBlogs>
+      },
     ],
   },
   {
