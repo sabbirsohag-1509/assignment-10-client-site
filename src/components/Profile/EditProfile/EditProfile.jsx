@@ -22,7 +22,7 @@ const ProfileEdit = ({ refreshProfile }) => {
     e.preventDefault();
     try {
       const res = await axios.patch(
-        `http://localhost:5000/users/${user.uid}`,
+        `https://home-nest-gamma.vercel.app/users/${user.uid}`,
         formData
       );
 
@@ -45,7 +45,6 @@ const ProfileEdit = ({ refreshProfile }) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-4xl p-6 md:p-10 flex flex-col md:flex-row gap-8">
-        
         {/* Profile Image Section */}
         <div className="flex flex-col items-center md:w-1/3 gap-4">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-blue-500 shadow-md">
@@ -69,7 +68,6 @@ const ProfileEdit = ({ refreshProfile }) => {
             Edit Profile
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
-
             <div className="flex flex-col">
               <label className="text-sm font-medium mb-1">Full Name</label>
               <input
@@ -104,7 +102,9 @@ const ProfileEdit = ({ refreshProfile }) => {
             </div>
 
             <div className="flex flex-col">
-              <label className="text-sm font-medium mb-1">Profile Image URL</label>
+              <label className="text-sm font-medium mb-1">
+                Profile Image URL
+              </label>
               <input
                 type="text"
                 name="photoURL"
@@ -125,13 +125,9 @@ const ProfileEdit = ({ refreshProfile }) => {
               />
             </div>
 
-            <button
-              type="submit"
-              className="btn btn-primary w-full mt-4"
-            >
+            <button type="submit" className="btn btn-primary w-full mt-4">
               Save Changes
             </button>
-
           </form>
         </div>
       </div>

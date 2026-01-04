@@ -8,7 +8,7 @@ const FeaturedProperties = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/latest-properties`)
+    fetch(`https://home-nest-gamma.vercel.app/latest-properties`)
       .then((res) => res.json())
       .then((data) => {
         setProperties(data);
@@ -40,8 +40,8 @@ const FeaturedProperties = () => {
         </h2>
 
         <p className="text-sm font-semibold text-gray-600 pb-4">
-          Discover our handpicked featured properties — offering your dream home with
-          elegance and style
+          Discover our handpicked featured properties — offering your dream home
+          with elegance and style
         </p>
       </div>
 

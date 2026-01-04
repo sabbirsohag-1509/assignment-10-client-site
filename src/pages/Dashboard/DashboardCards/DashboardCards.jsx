@@ -18,7 +18,9 @@ const DashboardCards = () => {
     const fetchStats = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/dashboard/stats");
+        const res = await axios.get(
+          "https://home-nest-gamma.vercel.app/dashboard/stats"
+        );
         // Optional chaining to avoid undefined
         setStats({
           properties: res.data?.properties || 0,
@@ -38,10 +40,30 @@ const DashboardCards = () => {
   }, []);
 
   const cardsData = [
-    { title: "Total Properties", value: stats.properties, icon: <Home />, bg: "bg-blue-500" },
-    { title: "Total Users", value: stats.users, icon: <User />, bg: "bg-green-500" },
-    { title: "Total Reviews", value: stats.reviews, icon: <Star />, bg: "bg-yellow-500" },
-    { title: "Revenue", value: stats.revenue.toLocaleString(), icon: <TbCurrencyTaka />, bg: "bg-purple-500" },
+    {
+      title: "Total Properties",
+      value: stats.properties,
+      icon: <Home />,
+      bg: "bg-blue-500",
+    },
+    {
+      title: "Total Users",
+      value: stats.users,
+      icon: <User />,
+      bg: "bg-green-500",
+    },
+    {
+      title: "Total Reviews",
+      value: stats.reviews,
+      icon: <Star />,
+      bg: "bg-yellow-500",
+    },
+    {
+      title: "Revenue",
+      value: stats.revenue.toLocaleString(),
+      icon: <TbCurrencyTaka />,
+      bg: "bg-purple-500",
+    },
   ];
 
   if (loading) {

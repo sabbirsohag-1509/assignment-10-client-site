@@ -32,7 +32,7 @@ const MyProperty = ({ property, setProperties }) => {
     if (confirmDelete.isConfirmed) {
       try {
         const res = await axios.delete(
-          `http://localhost:5000/properties/${property._id}`
+          `https://home-nest-gamma.vercel.app/properties/${property._id}`
         );
 
         if (res.data.deletedCount > 0) {
@@ -95,7 +95,8 @@ const MyProperty = ({ property, setProperties }) => {
 
         {/* Price */}
         <p className="flex items-center gap-1 text-gray-800 dark:text-white font-semibold text-sm sm:text-base">
-          <TbCurrencyTaka className="text-lg sm:text-xl" /> {Number(price).toLocaleString()} Tk
+          <TbCurrencyTaka className="text-lg sm:text-xl" />{" "}
+          {Number(price).toLocaleString()} Tk
         </p>
 
         {/* Posted Date & Email */}

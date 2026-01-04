@@ -11,7 +11,9 @@ const DashboardTable = () => {
     const fetchProperties = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/properties?limit=20");
+        const res = await axios.get(
+          "https://home-nest-gamma.vercel.app/properties?limit=20"
+        );
         setProperties(res.data.properties || res.data); // depending on backend response
         setLoading(false);
       } catch (err) {
@@ -37,11 +39,11 @@ const DashboardTable = () => {
   }
 
   return (
-      <div className="p-4 overflow-x-auto">
-          <h2 className="text-xl font-semibold mb-4">Latest Properties Table</h2>
+    <div className="p-4 overflow-x-auto">
+      <h2 className="text-xl font-semibold mb-4">Latest Properties Table</h2>
       <table className="min-w-full table-auto border-collapse border border-gray-300">
         <thead>
-          <tr className="bg-gray-100">
+          <tr className="bg-gray-100 dark:text-gray-700">
             <th className="border px-4 py-2">#</th>
             <th className="border px-4 py-2">Property Name</th>
             <th className="border px-4 py-2">Category</th>
@@ -59,7 +61,7 @@ const DashboardTable = () => {
             </tr>
           ) : (
             properties.map((prop, idx) => (
-              <tr key={prop._id} className="hover:bg-gray-50">
+              <tr key={prop._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                 <td className="border px-4 py-2">{idx + 1}</td>
                 <td className="border px-4 py-2">{prop.propertyName}</td>
                 <td className="border px-4 py-2">{prop.category}</td>

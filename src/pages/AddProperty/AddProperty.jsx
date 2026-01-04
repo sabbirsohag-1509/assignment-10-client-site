@@ -18,7 +18,7 @@ const AddProperty = () => {
     city: "",
     area: "",
     address: "",
-    imageURL: "", 
+    imageURL: "",
     images: ["", "", ""],
   });
 
@@ -59,7 +59,10 @@ const AddProperty = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/properties", newProperty);
+      await axios.post(
+        "https://home-nest-gamma.vercel.app/properties",
+        newProperty
+      );
 
       Swal.fire({
         icon: "success",

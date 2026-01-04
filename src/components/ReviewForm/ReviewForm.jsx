@@ -41,7 +41,10 @@ const ReviewForm = ({ property }) => {
     };
     console.log("Submitting review:", reviewData);
     try {
-      const res = await axios.post("http://localhost:5000/review", reviewData);
+      const res = await axios.post(
+        "https://home-nest-gamma.vercel.app/review",
+        reviewData
+      );
       console.log("Review submitted:", res.data);
       Swal.fire({
         position: "top-center",
@@ -54,9 +57,9 @@ const ReviewForm = ({ property }) => {
       setRating(0);
       setReviewText("");
 
-       setTimeout(() => {
-      window.location.reload();
-    }, 500); 
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (error) {
       console.error(
         "Error submitting review:",

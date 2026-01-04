@@ -27,7 +27,7 @@ const AllProperties = () => {
       city,
     });
 
-    fetch(`http://localhost:5000/properties?${params.toString()}`)
+    fetch(`https://home-nest-gamma.vercel.app/properties?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
         setProperties(data.properties);
@@ -50,7 +50,7 @@ const AllProperties = () => {
     e.preventDefault();
     const search_text = e.target.search.value;
     setLoadingg(true);
-    fetch(`http://localhost:5000/search?search=${search_text}`)
+    fetch(`https://home-nest-gamma.vercel.app/search?search=${search_text}`)
       .then((res) => res.json())
       .then((data) => {
         setProperties(data);
@@ -60,7 +60,9 @@ const AllProperties = () => {
 
   // Sort handler (unchanged)
   const handleSortChange = (sortValue) => {
-    fetch(`http://localhost:5000/sort-properties?sort=${sortValue}`)
+    fetch(
+      `https://home-nest-gamma.vercel.app/sort-properties?sort=${sortValue}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProperties(data);
@@ -89,13 +91,13 @@ const AllProperties = () => {
           <span className="absolute inset-[4px] border border-blue-300 rounded-lg pointer-events-none -z-10"></span>
         </h2>
         <p className="text-sm font-semibold text-gray-600 pb-4">
-          Explore more featured properties — offering your dream home with elegance and style
+          Explore more featured properties — offering your dream home with
+          elegance and style
         </p>
       </div>
 
       {/* Search + Filter + Sort */}
       <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
-
         {/* Search */}
         <div className="relative w-full max-w-md">
           <form onSubmit={handleSearch}>
@@ -115,7 +117,6 @@ const AllProperties = () => {
         <select
           value={category}
           onChange={(e) => {
-            
             setCategory(e.target.value);
             setCurrentPage(1);
           }}
@@ -181,7 +182,11 @@ const AllProperties = () => {
             <button
               key={page}
               onClick={() => setCurrentPage(page + 1)}
-              className={`join-item btn ${currentPage === page + 1 ? "btn-active bg-blue-600 text-white" : ""}`}
+              className={`join-item btn ${
+                currentPage === page + 1
+                  ? "btn-active bg-blue-600 text-white"
+                  : ""
+              }`}
             >
               {page + 1}
             </button>

@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 import {
-  BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
-  XAxis, YAxis, Tooltip, Legend, ResponsiveContainer
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
 } from "recharts";
 import axios from "axios";
 
@@ -14,13 +24,14 @@ const DashboardCharts = () => {
 
   useEffect(() => {
     // Fetch data from backend
-    axios.get("http://localhost:5000/dashboard/charts")
-      .then(res => {
+    axios
+      .get("https://home-nest-gamma.vercel.app/dashboard/charts")
+      .then((res) => {
         setPropertiesData(res.data.propertiesByCategory);
         setRevenueData(res.data.revenueByMonth);
         setUsersData(res.data.usersStatus);
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -48,7 +59,12 @@ const DashboardCharts = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="revenue" stroke="#10b981" strokeWidth={3} />
+            <Line
+              type="monotone"
+              dataKey="revenue"
+              stroke="#10b981"
+              strokeWidth={3}
+            />
           </LineChart>
         </ResponsiveContainer>
       </div>
@@ -69,7 +85,10 @@ const DashboardCharts = () => {
               label
             >
               {usersData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip />

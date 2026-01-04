@@ -7,7 +7,6 @@ import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import Loading from "../../components/Loading/Loading";
 
-
 const MyRatings = () => {
   const { user } = use(AuthContext);
   const [reviews, setReviews] = useState([]);
@@ -16,9 +15,9 @@ const MyRatings = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`http://localhost:5000/review/${user.email}`)
+    fetch(`https://home-nest-gamma.vercel.app/review/${user.email}`)
       .then((res) => res.json())
-      .then(data => {
+      .then((data) => {
         setReviews(data);
         setLoading(false);
       })
@@ -28,7 +27,7 @@ const MyRatings = () => {
       });
   }, [user]);
 
-    // Delete Review Handler
+  // Delete Review Handler
   const handleDeleteReview = async (reviewId) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -44,7 +43,7 @@ const MyRatings = () => {
 
     try {
       const res = await axios.delete(
-        `http://localhost:5000/review/${reviewId}`
+        `https://home-nest-gamma.vercel.app/review/${reviewId}`
       );
 
       if (res.data.deletedCount > 0) {
@@ -67,16 +66,15 @@ const MyRatings = () => {
 
   if (loading) {
     return (
-      <div> 
+      <div>
         <Loading></Loading>
       </div>
     );
   }
 
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 py-6 px-3 sm:px-6 lg:px-10">
-      <Helmet> 
+      <Helmet>
         <title>My Ratings & Reviews - HomeNest</title>
       </Helmet>
       <div className="text-center pb-6 relative z-10">
@@ -91,7 +89,11 @@ const MyRatings = () => {
 
       {reviews.length === 0 ? (
         <p className="text-center text-gray-600 dark:text-gray-300 text-lg">
-          You haven’t posted any reviews yet <span className="font-semibold text-blue-600">{ user.displayName }</span>.
+          You haven’t posted any reviews yet{" "}
+          <span className="font-semibold text-blue-600">
+            {user.displayName}
+          </span>
+          .
         </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
@@ -99,7 +101,6 @@ const MyRatings = () => {
             <div
               key={review._id}
               className="bg-white dark:bg-gray-800 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col"
-
             >
               {/* Property Image */}
               <div className="relative">

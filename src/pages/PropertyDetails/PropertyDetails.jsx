@@ -18,7 +18,7 @@ const PropertyDetails = () => {
 
   // Fetch Property details
   useEffect(() => {
-    fetch(`http://localhost:5000/propertyDetails/${id}`)
+    fetch(`https://home-nest-gamma.vercel.app/propertyDetails/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProperty(data);
@@ -29,7 +29,7 @@ const PropertyDetails = () => {
 
   // Fetch Reviews
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews/${id}`)
+    fetch(`https://home-nest-gamma.vercel.app/reviews/${id}`)
       .then((res) => res.json())
       .then((data) => {
         // Ensure reviews is always an array
@@ -53,7 +53,10 @@ const PropertyDetails = () => {
     );
 
   // Combine main + extra images
-  const allImages = [property.imageURL, ...(property.images || []).filter(Boolean)];
+  const allImages = [
+    property.imageURL,
+    ...(property.images || []).filter(Boolean),
+  ];
 
   const openModal = (img) => {
     setCurrentImage(img);
@@ -105,7 +108,9 @@ const PropertyDetails = () => {
 
         {/* Info */}
         <div className="p-6 space-y-6">
-          <h2 className="text-3xl font-bold text-base-content">{property.propertyName}</h2>
+          <h2 className="text-3xl font-bold text-base-content">
+            {property.propertyName}
+          </h2>
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-base-content/70">
             <span className="flex items-center">
@@ -118,7 +123,9 @@ const PropertyDetails = () => {
             </span>
           </div>
 
-          <p className="leading-relaxed text-base-content/90">{property.description}</p>
+          <p className="leading-relaxed text-base-content/90">
+            {property.description}
+          </p>
 
           <div className="flex flex-wrap justify-between items-center border-t border-base-300 dark:border-gray-700 pt-4 gap-4">
             <p className="text-xl font-semibold text-primary flex items-center gap-1">
@@ -135,13 +142,20 @@ const PropertyDetails = () => {
         {(property.userName || property.userEmail) && (
           <div className="mt-6 h-24 bg-base-200 dark:bg-gray-800 rounded-xl p-5 flex items-center gap-4 border border-base-300 dark:border-gray-700 shadow-md">
             <img
-              src={property.photoUrl || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+              src={
+                property.photoUrl ||
+                "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+              }
               alt={property.userName || "User"}
               className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-blue-400 object-cover shadow-sm"
             />
             <div className="flex-1">
-              <h3 className="text-lg md:text-xl font-semibold text-base-content">{property.userName || "Unknown User"}</h3>
-              <p className="text-sm md:text-base text-base-content/70">{property.userEmail || "No email provided"}</p>
+              <h3 className="text-lg md:text-xl font-semibold text-base-content">
+                {property.userName || "Unknown User"}
+              </h3>
+              <p className="text-sm md:text-base text-base-content/70">
+                {property.userEmail || "No email provided"}
+              </p>
               <span className="inline-block mt-1 text-xs md:text-sm text-blue-400 font-medium uppercase tracking-wide">
                 Property Owner
               </span>
@@ -159,7 +173,10 @@ const PropertyDetails = () => {
         {Array.isArray(reviews) && reviews.length > 0 ? (
           <div className="space-y-4">
             {reviews.map((r) => (
-              <div key={r._id} className="p-4 border border-gray-200 rounded-lg shadow-sm">
+              <div
+                key={r._id}
+                className="p-4 border border-gray-200 rounded-lg shadow-sm"
+              >
                 <div className="flex items-center gap-3 mb-2">
                   <img
                     src={r.reviewerImage}
@@ -168,7 +185,9 @@ const PropertyDetails = () => {
                   />
                   <div>
                     <h4 className="font-semibold">{r.reviewerName}</h4>
-                    <span className="text-sm text-gray-500">{new Date(r.reviewDate).toLocaleDateString()}</span>  
+                    <span className="text-sm text-gray-500">
+                      {new Date(r.reviewDate).toLocaleDateString()}
+                    </span>
                   </div>
                 </div>
                 <p>{r.review}</p>

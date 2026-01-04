@@ -16,7 +16,7 @@ const UpdateProperties = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/propertyDetails/${id}`)
+    fetch(`https://home-nest-gamma.vercel.app/propertyDetails/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProperty(data);
@@ -51,7 +51,7 @@ const UpdateProperties = () => {
     // console.log(updatedProperty);
     try {
       await axios.patch(
-        `http://localhost:5000/properties/${id}`,
+        `https://home-nest-gamma.vercel.app/properties/${id}`,
         updatedProperty
       );
       //   console.log("Property updated:", res.data);
@@ -85,7 +85,7 @@ const UpdateProperties = () => {
       className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center relative"
       style={{ backgroundImage: `url(${bgImg})` }}
     >
-      <Helmet> 
+      <Helmet>
         <title>Update Property - HomeNest</title>
       </Helmet>
       {/* Dark Overlay */}
@@ -96,15 +96,15 @@ const UpdateProperties = () => {
         onSubmit={formHandleSubmit}
         className="relative w-full max-w-3xl bg-gray-900/90 text-gray-100 shadow-2xl rounded-lg p-8 space-y-6 z-10 transition-transform duration-300 hover:scale-[1.01]"
       >
-         <div className="text-center my-8 relative z-10">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
-          Update Property <span className="text-blue-600">Information</span>
-          {/* Outer border */}
-          <span className="absolute inset-0 border-2 border-blue-600 rounded-lg pointer-events-none -z-0"></span>
-          {/* Inner border */}
-          <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-0"></span>
-        </h2>
-      </div>
+        <div className="text-center my-8 relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 relative inline-block px-6 py-2">
+            Update Property <span className="text-blue-600">Information</span>
+            {/* Outer border */}
+            <span className="absolute inset-0 border-2 border-blue-600 rounded-lg pointer-events-none -z-0"></span>
+            {/* Inner border */}
+            <span className="absolute inset-[4px] border-2 border-blue-300 rounded-lg pointer-events-none -z-0"></span>
+          </h2>
+        </div>
 
         {/* Property Name */}
         <div>
