@@ -4,6 +4,9 @@ import { Link, NavLink } from "react-router";
 import logoImg from "../../assets/logo.png";
 import { AuthContext } from "../../pages/Context-Provider/AuthContext";
 import Swal from "sweetalert2";
+import { Info } from "lucide-react";
+import { Mail } from "lucide-react";
+import { BookOpen } from "lucide-react";
 
 const Navbar = () => {
   const { user, logOutInfo } = useContext(AuthContext);
@@ -14,25 +17,39 @@ const Navbar = () => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const handleLogout = () => {
-    logOutInfo()
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Logged out successfully",
-          showConfirmButton: false,
-          timer: 1500,
+const handleLogout = () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You will be logged out from your account!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, log me out",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      logOutInfo()
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Logged out successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((error) => {
+          console.error("Logout error:", error);
+          Swal.fire({
+            icon: "error",
+            title: "Logout failed",
+            text: error.message,
+          });
         });
-      })
-      .catch((error) => {
-        console.error("Logout error:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Logout failed",
-          text: error.message,
-        });
-      });
-  };
+    }
+  });
+};
+
 
   const handleTheme = (checked) => {
     setTheme(checked ? "dark" : "light");
@@ -40,6 +57,7 @@ const Navbar = () => {
 
   const links = (
     <>
+      {/* Home  */}
       <NavLink
         to="/"
         className={({ isActive }) =>
@@ -54,7 +72,7 @@ const Navbar = () => {
         <Home className="w-4 h-4" />
         Home
       </NavLink>
-
+      {/* All Properties  */}
       <NavLink
         to="/all-properties"
         className={({ isActive }) =>
@@ -68,57 +86,53 @@ const Navbar = () => {
         <Building className="w-4 h-4" />
         All Properties
       </NavLink>
-
-      {user && (
-        <>
-          <NavLink
-            to="/add-property"
-            className={({ isActive }) =>
-              `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
-                isActive
-                  ? "text-blue-600 font-medium"
-                  : "text-base-content/70 hover:text-blue-500"
-              }`
-            }
-          >
-            <Plus className="w-4 h-4" />
-            Add Property
-          </NavLink>
-
-          <NavLink
-            to="/my-properties"
-            className={({ isActive }) =>
-              `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
-                isActive
-                  ? "text-blue-600 font-medium"
-                  : "text-base-content/70 hover:text-blue-500"
-              }`
-            }
-          >
-            <Building2 className="w-4 h-4" />
-            My Properties
-          </NavLink>
-
-          <NavLink
-            to="/my-ratings"
-            className={({ isActive }) =>
-              `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
-                isActive
-                  ? "text-blue-600 font-medium"
-                  : "text-base-content/70 hover:text-blue-500"
-              }`
-            }
-          >
-            <Star className="w-4 h-4" />
-            My Ratings
-          </NavLink>
-        </>
-      )}
+      {/* About  */}
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
+            isActive
+              ? "text-blue-600 font-medium"
+              : "text-base-content/70 hover:text-blue-500"
+          }`
+        }
+      >
+        <Info className="w-4 h-4" />
+        About
+      </NavLink>
+      {/* Contact  */}
+      <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+          `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
+            isActive
+              ? "text-blue-600 font-medium"
+              : "text-base-content/70 hover:text-blue-500"
+          }`
+        }
+      >
+        <Mail className="w-4 h-4" />
+        Contact
+      </NavLink>
+      {/* Blog  */}
+      <NavLink
+        to="/blog"
+        className={({ isActive }) =>
+          `flex items-center gap-1.5 mx-2 text-sm transition-colors duration-200 ${
+            isActive
+              ? "text-blue-600 font-medium"
+              : "text-base-content/70 hover:text-blue-500"
+          }`
+        }
+      >
+        <BookOpen className="w-4 h-4" />
+        Blog
+      </NavLink>
     </>
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm h-16 px-4 md:px-8 lg:px-12 sticky top-0 z-50 border-b border-gray-200">
+    <div className="navbar bg-base-100 shadow-sm h-16 px-4 md:px-8 lg:px-10 sticky top-0 z-50 border-b border-gray-200">
       {/* Navbar Start */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -146,7 +160,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="flex items-center">
-          <img src={logoImg} alt="Logo" className="w-12 md:w-14" />
+          <img src={logoImg} alt="Logo" className="w-12 md:w-14 dark:invert" />
           <span className="font-bold text-xl md:text-2xl">
             Home<span className="text-blue-600">Nest</span>
           </span>
@@ -222,6 +236,7 @@ const Navbar = () => {
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-8 md:w-10 rounded-full">
                 <img
+                  title={user.displayName}
                   src={user.photoURL || "https://i.pravatar.cc/300"}
                   alt={user.displayName || "User"}
                 />
@@ -232,25 +247,11 @@ const Navbar = () => {
               className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <span className="font-semibold hover:bg-blue-400 hover:text-white">
-                  {user.displayName}
-                </span>
-              </li>
-              <li>
-                <span className="text-sm text-gray-600 hover:bg-blue-400 hover:text-white">
-                  {user.email}
-                </span>
-              </li>
-              <li>
-                  <NavLink to='/profile'> 
-                    <button className="font-medium"> 
-                      Profile
-                    </button>
+                <NavLink to="/profile">
+                  <button className="font-medium">Profile</button>
                 </NavLink>
-                  <NavLink to='/settings'> 
-                    <button className="font-medium"> 
-                      Dashboard
-                    </button>
+                <NavLink to="/dashboard">
+                  <button className="font-medium">Dashboard</button>
                 </NavLink>
                 <button
                   onClick={handleLogout}

@@ -75,11 +75,11 @@ const MyRatings = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 py-10 px-3 sm:px-6 lg:px-10">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 py-6 px-3 sm:px-6 lg:px-10">
       <Helmet> 
         <title>My Ratings & Reviews - HomeNest</title>
       </Helmet>
-      <div className="text-center my-8 relative z-10">
+      <div className="text-center pb-6 relative z-10">
         <h2 className="text-xl md:text-2xl font-bold mb-4 relative inline-block px-6 py-2">
           My <span className="text-blue-600">Ratings & Reviews</span>
           {/* Outer border */}
@@ -91,21 +91,22 @@ const MyRatings = () => {
 
       {reviews.length === 0 ? (
         <p className="text-center text-gray-600 dark:text-gray-300 text-lg">
-          You haven’t posted any reviews yet.
+          You haven’t posted any reviews yet <span className="font-semibold text-blue-600">{ user.displayName }</span>.
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
           {reviews.map((review) => (
             <div
               key={review._id}
               className="bg-white dark:bg-gray-800 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col"
+
             >
               {/* Property Image */}
               <div className="relative">
                 <img
                   src={review.propertyImage}
                   alt={review.propertyName}
-                  className="w-full h-48 sm:h-52 md:h-56 object-cover transition-transform duration-500 hover:scale-105"
+                  className="w-full h-40 sm:h-44 md:h-48 object-cover transition-transform duration-500 hover:scale-105"
                 />
 
                 {/* Property Name (modern badge design) */}
@@ -115,7 +116,7 @@ const MyRatings = () => {
               </div>
 
               {/* Content */}
-              <div className="flex flex-col justify-between p-5 flex-1">
+              <div className="flex flex-col justify-between p-3 flex-1">
                 {/* Reviewer Info & Delete */}
                 <div className="flex justify-between items-center mb-3 flex-wrap gap-3">
                   <div className="flex items-center gap-3">

@@ -33,7 +33,7 @@ const NewsLetter = () => {
 
       <div className="max-w-3xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
-          Stay Updated with <span className="text-blue-600 dark:text-blue-400">HomeNest</span>
+          Stay Updated with Home<span className="text-blue-600 dark:text-blue-400">Nest</span>
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-8">
           Subscribe to our newsletter to get the latest property listings, real estate tips, and market insights directly in your inbox.

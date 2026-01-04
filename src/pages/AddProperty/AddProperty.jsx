@@ -18,8 +18,8 @@ const AddProperty = () => {
     city: "",
     area: "",
     address: "",
-    imageURL: "",      // Main image
-    images: ["", "", ""], // Extra 3 images for details carousel
+    imageURL: "", 
+    images: ["", "", ""],
   });
 
   const [loading, setLoading] = useState(false);
@@ -69,7 +69,7 @@ const AddProperty = () => {
         showConfirmButton: false,
       });
 
-      navigate("/my-properties");
+      navigate("/");
 
       // Reset form
       setFormData({
@@ -111,12 +111,12 @@ const AddProperty = () => {
       <title>Add Property - HomeNest</title>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div className="absolute inset-0 bg-black/50"></div>
 
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="relative w-full max-w-3xl bg-white/90 dark:bg-gray-800/90 shadow-lg rounded-lg p-6 sm:p-8 space-y-6 z-10"
+        className="relative w-full max-w-3xl bg-white/70 dark:bg-gray-800/70 shadow-lg rounded-lg p-6 sm:p-8 space-y-6 z-10"
       >
         <div className="text-center">
           <h2 className="text-xl md:text-2xl font-bold mb-2 relative inline-block px-6 py-1">

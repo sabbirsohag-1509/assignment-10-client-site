@@ -6,8 +6,16 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const MyProperty = ({ property, setProperties }) => {
-  const { propertyName, category, price, city, area, postedDate, imageURL } =
-    property;
+  const {
+    propertyName,
+    category,
+    price,
+    city,
+    area,
+    postedDate,
+    imageURL,
+    userEmail,
+  } = property;
 
   /// Delete Handler
   const deleteBtnHandler = async () => {
@@ -51,72 +59,74 @@ const MyProperty = ({ property, setProperties }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-600 rounded-xl overflow-hidden
-                 shadow-sm hover:shadow-xl
+    <div
+      className="bg-white dark:bg-gray-700 rounded-xl overflow-hidden
+                 shadow-sm hover:shadow-md
                  transition-all duration-300
-                 transform hover:-translate-y-1">
-      <title>{propertyName} - My Property</title>
-
-      {/* Image */}
+                 transform hover:-translate-y-0.5
+                 w-full sm:w-[320px] md:w-[340px]"
+    >
+      {/* Property Image */}
       <div className="relative">
         <img
           src={imageURL}
           alt={propertyName}
-          className="w-full h-56 object-cover transform hover:scale-105
-                     transition-transform duration-500"
+          className="w-full h-44 sm:h-48 object-cover transition-transform duration-500 hover:scale-105"
         />
       </div>
 
       {/* Details */}
-      <div className="p-6 space-y-3 dark:bg-gray-800">
-        <h2 className="text-2xl font-semibold text-gray-800 dark:text-white ">
+      <div className="p-4 sm:p-5 space-y-2 dark:bg-gray-800">
+        {/* Name & Category */}
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white truncate">
           {propertyName}
         </h2>
-
-        <p className="text-sm text-gray-500 dark:text-white">
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">
           Category: {category}
         </p>
 
-        <div className="flex items-center gap-1 text-gray-600 dark:text-white">
-          <MapPin size={16} />
+        {/* Location */}
+        <div className="flex items-center gap-1 text-gray-600 dark:text-gray-200 text-xs sm:text-sm">
+          <MapPin size={14} />
           <span>
             {city}, {area}
           </span>
         </div>
 
-        <p className="flex items-center gap-1 text-gray-800 dark:text-white font-semibold">
-          <TbCurrencyTaka className="text-xl" /> {price} Tk
+        {/* Price */}
+        <p className="flex items-center gap-1 text-gray-800 dark:text-white font-semibold text-sm sm:text-base">
+          <TbCurrencyTaka className="text-lg sm:text-xl" /> {Number(price).toLocaleString()} Tk
         </p>
 
-        <p className="text-xs text-gray-500 dark:text-white">
+        {/* Posted Date & Email */}
+        <p className="text-xs text-gray-500 dark:text-gray-300">
           Posted on: {new Date(postedDate).toLocaleDateString()}
         </p>
-
-        <p className="text-xs text-gray-500 flex items-center gap-0.5">
-          <MdEmail /> {property.userEmail}
+        <p className="text-xs text-gray-500 dark:text-gray-300 flex items-center gap-0.5">
+          <MdEmail size={14} /> {userEmail}
         </p>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row justify-between items-center pt-5 gap-3">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-3 pt-3">
           <Link
             to={`/propertyDetails/${property._id}`}
-            className="flex items-center w-full gap-1 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-medium sm:w-36 justify-center"
+            className="flex items-center w-full sm:w-28 gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-xs sm:text-sm font-medium justify-center transition-all duration-300"
           >
-            <Info size={18} /> Details
+            <Info size={16} /> Details
           </Link>
 
           <Link
             to={`/update-properties/${property._id}`}
-            className="flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg text-sm font-medium w-full sm:w-36 justify-center"
+            className="flex items-center w-full sm:w-28 gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg text-xs sm:text-sm font-medium justify-center transition-all duration-300"
           >
-            <Pencil size={16} /> Update
+            <Pencil size={14} /> Update
           </Link>
 
           <button
             onClick={deleteBtnHandler}
-            className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg text-sm font-medium w-full sm:w-36 justify-center cursor-pointer"
+            className="flex items-center w-full sm:w-28 gap-1 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-xs sm:text-sm font-medium justify-center transition-all duration-300"
           >
-            <Trash2 size={16} /> Delete
+            <Trash2 size={14} /> Delete
           </button>
         </div>
       </div>

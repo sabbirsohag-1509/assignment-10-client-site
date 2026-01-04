@@ -16,6 +16,13 @@ import TermsCondition from "../components/Footer/TermsCondition/TermsCondition";
 import PrivacyPolicy from "../components/Footer/PrivacyPolicy/PrivacyPolicy";
 import BlogDetails from "../pages/Home/LatestBlogs/BlogDetails";
 import AllBlogs from "../pages/Home/LatestBlogs/Blogs/Blogs";
+import About from "../components/About/About";
+import Contact from "../components/Contact/Contact";
+import DashboardLayout from "../layout/DashboardLayout/DashboardLayout";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
+import Profile from "../components/Profile/Profile";
+import ProfileEdit from "../components/Profile/EditProfile/EditProfile";
+import Settings from "../components/Settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -35,10 +42,6 @@ const router = createBrowserRouter([
         Component: LogIn,
       },
       {
-        path: "/add-property",
-        element: <PrivateRoute><AddProperty></AddProperty></PrivateRoute>,
-      },
-      {
         path: "/all-properties",
         Component: AllProperties,
       },
@@ -47,16 +50,8 @@ const router = createBrowserRouter([
         element: <PropertyDetails></PropertyDetails>
       },
       {
-        path: "/my-properties",
-        element: <PrivateRoute><MyProperties></MyProperties></PrivateRoute>,
-      },
-      {
         path: "/update-properties/:id",
         element: <UpdateProperties></UpdateProperties>
-      },
-      {
-        path: "/my-ratings",
-        element: <PrivateRoute><MyRatings></MyRatings></PrivateRoute>
       },
       {
         path: "/about-us",
@@ -78,6 +73,56 @@ const router = createBrowserRouter([
         path: "/blogs",
         element:<AllBlogs></AllBlogs>
       },
+      {
+        path: "/profile",
+        element: <Profile></Profile>
+      },
+      {
+        path: "/about",
+        element:<About></About>
+      },
+      {
+        path: "/contact",
+        element:<Contact></Contact>
+      },
+      {
+        path: "/blog",
+        element:<AllBlogs></AllBlogs>,
+      },
+      {
+        path: "/dashboard/profile-edit",
+        element: <ProfileEdit></ProfileEdit>
+      },
+      {
+        path: "/dashboard/settings",
+        element: <Settings></Settings>
+      }
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    children: [ 
+      {
+        path: "/dashboard/my-properties",
+        element: <PrivateRoute><MyProperties></MyProperties></PrivateRoute>,
+      },
+      { 
+        path: "/dashboard/add-property",
+        element: <PrivateRoute><AddProperty></AddProperty></PrivateRoute>,
+      },
+      {
+        path: "/dashboard",
+        element: <DashboardHome></DashboardHome>
+      },
+      {
+        path: "/dashboard/my-ratings",
+        element: <PrivateRoute><MyRatings></MyRatings></PrivateRoute>
+      },
+      {
+        path: "/dashboard/profile",
+        element: <Profile></Profile>
+      }
     ],
   },
   {
